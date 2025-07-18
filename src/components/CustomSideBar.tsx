@@ -6,8 +6,7 @@ import {
   LayoutGrid,
   Link,
   Puzzle,
-  ShoppingBasket,
-  X,
+  ShoppingBasket
 } from "lucide-react";
 import { useState } from "react";
 
@@ -20,43 +19,42 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarSeparator,
-  useSidebar,
+  SidebarSeparator
 } from "@/components/ui/sidebar";
 
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "HOME",
     url: "#",
     icon: LayoutGrid,
   },
   {
-    title: "Satuan",
+    title: "SATUAN",
     url: "#",
     icon: Puzzle,
   },
   {
-    title: "Barang",
+    title: "BARANG",
     url: "#",
     icon: Box,
   },
   {
-    title: "Penjualan",
+    title: "PENJUALAN",
     url: "#",
     icon: ShoppingBasket,
   },
   {
-    title: "Links",
+    title: "LINKS",
     icon: Link,
     children: [
       {
-        title: "Github",
+        title: "GITHUB",
         url: "#",
         icon: CircleSmall,
       },
       {
-        title: "Vercel",
+        title: "VERCEL",
         url: "#",
         icon: CircleSmall,
       },
@@ -65,7 +63,7 @@ const items = [
 ];
 
 export function CustomSideBar() {
-  const { open, toggleSidebar } = useSidebar();
+  // const { open, toggleSidebar } = useSidebar();
   const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
 
   const toggleSubmenu = (title: string) => {
@@ -76,10 +74,10 @@ export function CustomSideBar() {
   };
 
   return (
-    <Sidebar >
+    <Sidebar className="!z-3">      
       <SidebarContent className="sidebar">
-        {open && (
-          <div className="flex justify-end p-2 w-full sm:hidden">
+        {/* {open && (
+          <div className="area-menu-close">
             <button
               onClick={toggleSidebar}
               className="menu-close"
@@ -87,7 +85,7 @@ export function CustomSideBar() {
               <X className="h-5 w-5" />
             </button>
           </div>
-        )}
+        )} */}
 
         <SidebarGroup>
           <SidebarGroupLabel className="menu-title">
@@ -139,7 +137,7 @@ export function CustomSideBar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-      </SidebarContent>
+      </SidebarContent>      
     </Sidebar>
   );
 }

@@ -138,28 +138,32 @@
 
 @layer components {
   .sidebar {
-    @apply !bg-sky-700 !border-rose-600 !ring-0 !outline-0;
+    @apply !bg-sky-700 !border-rose-600 !ring-0 !outline-0 w-75 px-2.5;
   }
   .menu-title {
     font-family: var(--font-gotham);
     font-size: 1em !important;
     color: var(--color-white) !important;
     text-transform: uppercase;
-    @apply flex justify-center py-6;
+    @apply flex justify-center py-9 sm:py-11;
   }
 
   .menu-item {
     font-family: var(--font-gotham) !important;
     font-size: 1em !important;
     color: var(--color-white) !important;
-    @apply cursor-pointer !px-3 !py-6 hover:!text-[var(--color-black)] hover:!bg-sky-100;
+    @apply cursor-pointer !px-3 !py-6 my-1 hover:!text-[var(--color-black)] hover:!bg-white focus:!text-[var(--color-black)] focus:!bg-white active:!text-[var(--color-black)] active:!bg-white;
   }
 
   .menu-subitem {
     font-family: var(--font-gotham) !important;
     font-size: 1em !important;
     color: var(--color-white) !important;
-    @apply flex items-center gap-2 p-3 text-muted-foreground rounded-md hover:!text-[var(--color-black)] hover:!bg-sky-100;
+    @apply flex items-center gap-2 p-3 !my-3 text-muted-foreground rounded-md hover:!text-[var(--color-black)] hover:!bg-white focus:!text-[var(--color-black)] focus:!bg-white active:!text-[var(--color-black)] active:!bg-white;
+  }
+
+  .area-menu-close {
+    @apply flex justify-end p-1.5 w-full sm:hidden;
   }
 
   .menu-close {
@@ -168,6 +172,20 @@
   }
 
   .menu-separator {
-    @apply !m-0 border border-solid border-sky-100;
+    @apply !m-0;
+  }
+
+  .area-header {
+    background-color: var(--color-white);
+    @apply flex items-center sticky top-0 z-2 cursor-pointer;
+  }
+
+  .header-image {
+    @apply w-12 h-12 my-3 mx-2 sm:w-16 sm:h-16 sm:ml-5;
+  }
+
+  .header-text {
+    font-family: var(--font-gotham);
+    @apply flex items-center w-full text-[1.25em] sm:text-[1.5em];
   }
 }

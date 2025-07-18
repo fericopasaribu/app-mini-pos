@@ -23,6 +23,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useIsMobile } from "@/hooks/use-mobile";
+import CustomHeader from "@/layouts/CustomHeader";
 import { cn } from "@/lib/utils";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
@@ -255,20 +256,23 @@ function SidebarTrigger({
   const { toggleSidebar } = useSidebar();
 
   return (
-    <Button
-      data-sidebar="trigger"
-      data-slot="sidebar-trigger"
-      variant="ghost"
-      size="icon"
-      className={cn("cursor-pointer",className)}
-      onClick={(event) => {
-        onClick?.(event);
-        toggleSidebar();
-      }}
-      {...props}>
-      <Menu className="!h-6 !w-6 !ml-1"/>
-      <span className="sr-only">Toggle Sidebar</span>
-    </Button>
+    <div className="!h-20 sm:!h-24 cursor-pointer sticky top-0 flex w-full justify-start drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white">
+      <Button
+        data-sidebar="trigger"
+        data-slot="sidebar-trigger"
+        variant="ghost"
+        size="icon"
+        className={cn("h-full items-center justify-start px-2", className)}
+        onClick={(event) => {
+          onClick?.(event);
+          toggleSidebar();
+        }}
+        {...props}>
+        <Menu className="!h-6 !w-6" />
+      </Button>
+
+      <CustomHeader />
+    </div>
   );
 }
 

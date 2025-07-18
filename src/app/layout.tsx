@@ -19,9 +19,7 @@ export default function RootLayout({
         <SidebarProvider>
           <CustomSideBar />
           <main>
-            <div className="sm:hidden p-2">
-              <SidebarTrigger />
-            </div>
+            <SidebarTrigger />
             {children}
           </main>
         </SidebarProvider>
