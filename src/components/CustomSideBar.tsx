@@ -4,9 +4,9 @@ import {
   ChevronDown,
   CircleSmall,
   LayoutGrid,
-  Link,
+  Link as Links,
   Puzzle,
-  ShoppingBasket
+  ShoppingBasket,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -19,43 +19,45 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarSeparator
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // Menu items.
 const items = [
   {
     title: "HOME",
-    url: "#",
+    url: "/",
     icon: LayoutGrid,
   },
   {
     title: "SATUAN",
-    url: "#",
+    url: "/satuan",
     icon: Puzzle,
   },
   {
     title: "BARANG",
-    url: "#",
+    url: "/barang",
     icon: Box,
   },
   {
     title: "PENJUALAN",
-    url: "#",
+    url: "/penjualan",
     icon: ShoppingBasket,
   },
   {
     title: "LINKS",
-    icon: Link,
+    icon: Links,
     children: [
       {
         title: "GITHUB",
-        url: "#",
+        url: "/github",
         icon: CircleSmall,
       },
       {
         title: "VERCEL",
-        url: "#",
+        url: "/vercel",
         icon: CircleSmall,
       },
     ],
@@ -65,6 +67,7 @@ const items = [
 export function CustomSideBar() {
   // const { open, toggleSidebar } = useSidebar();
   const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
+  const pathname = usePathname();
 
   const toggleSubmenu = (title: string) => {
     setOpenSubmenus((prev) => ({
@@ -73,8 +76,10 @@ export function CustomSideBar() {
     }));
   };
 
+  // if (!mounted) return null;
+
   return (
-    <Sidebar className="!z-3">      
+    <Sidebar className="!z-3">
       <SidebarContent className="sidebar">
         {/* {open && (
           <div className="area-menu-close">
@@ -96,39 +101,62 @@ export function CustomSideBar() {
             <SidebarMenu>
               {items.map((item) => {
                 const hasChildren = !!item.children;
-                const isOpen = openSubmenus[item.title];
+                const isChildActive =
+                  hasChildren &&
+                  item.children?.some((child) => child.url === pathname);
 
+                const isOpen = openSubmenus[item.title] ?? isChildActive;
+                const isActive = item.url === pathname || isChildActive;
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton className="menu-item" asChild>
-                      <button
-                        onClick={() =>
-                          hasChildren ? toggleSubmenu(item.title) : undefined
-                        }
-                        className="flex items-center gap-2 w-full text-left">
-                        {item.icon && <item.icon className="h-4 w-4" />}
-                        <span>{item.title}</span>
-                        {hasChildren && (
+                      {hasChildren ? (
+                        <button
+                          onClick={() => toggleSubmenu(item.title)}
+                          className={`!px-3 !py-6 my-1 ${
+                            isActive ? "menu-active" : ""
+                          }`}>
+                          {item.icon && <item.icon className="h-4 w-4" />}
+                          <span>{item.title}</span>
                           <ChevronDown
                             className={`h-4 w-4 ml-auto transition-transform ${
                               isOpen ? "rotate-180" : ""
                             }`}
                           />
-                        )}
-                      </button>
+                        </button>
+                      ) : (
+                        <Link
+                          href={item.url}
+                          className={`!px-3 !py-6 my-1 ${
+                            isActive ? "menu-active" : ""
+                          }`}>
+                          {item.icon && <item.icon className="h-4 w-4" />}
+                          <span>{item.title}</span>
+                        </Link>
+                      )}
                     </SidebarMenuButton>
 
                     {/* Submenu jika ada dan sedang dibuka */}
                     {hasChildren && isOpen && (
                       <ul className="ml-6 mt-1 space-y-1 list-none">
-                        {item.children.map((child) => (
-                          <li key={child.title}>
-                            <a href={child.url} className="menu-subitem">
-                              {child.icon && <child.icon className="h-4 w-4" />}
-                              {child.title}
-                            </a>
-                          </li>
-                        ))}
+                        {item.children.map((child) => {
+                          const isSubActive = pathname === child.url;
+
+                          return (
+                            <li key={child.title}>
+                              <Link
+                                href={child.url}
+                                className={`menu-subitem ${
+                                  isSubActive ? "menu-active" : ""
+                                }`}>
+                                {child.icon && (
+                                  <child.icon className="h-4 w-4" />
+                                )}
+                                {child.title}
+                              </Link>
+                            </li>
+                          );
+                        })}
                       </ul>
                     )}
                   </SidebarMenuItem>
@@ -137,7 +165,7 @@ export function CustomSideBar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-      </SidebarContent>      
+      </SidebarContent>
     </Sidebar>
   );
 }

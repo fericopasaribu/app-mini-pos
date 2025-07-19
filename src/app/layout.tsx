@@ -2,6 +2,7 @@ import { CustomSideBar } from "@/components/CustomSideBar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import "./globals.css";
+import CustomFooter from "@/layouts/CustomFooter";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,10 +19,11 @@ export default function RootLayout({
       <body>
         <SidebarProvider>
           <CustomSideBar />
-          <main>
+          <section className="area-main">
             <SidebarTrigger />
             {children}
-          </main>
+            <CustomFooter />
+          </section>
         </SidebarProvider>
       </body>
     </html>
