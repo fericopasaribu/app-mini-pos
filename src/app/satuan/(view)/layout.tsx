@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ViewSatuanPage from "./page";
 
 export const metadata: Metadata = {
-  title: `${CUSTOM_TEXT.app_name} - ${CUSTOM_TEXT.menu_satuan}`,
+  title: `${CUSTOM_TEXT.app_name} - ${CUSTOM_TEXT.text_tampil_data} ${CUSTOM_TEXT.menu_satuan}`,
   description: "Panel untuk menampilkan data satuan",
 };
 

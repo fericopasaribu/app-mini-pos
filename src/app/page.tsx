@@ -7,7 +7,7 @@ export default function RootPage() {
     <div className="area-content">
       <CustomBreadcrumb />
       <CustomCard title={`${CUSTOM_TEXT.menu_home}`}>
-        <p className="text-muted-foreground">Ini Halaman Home</p>
+        Halaman Home 
       </CustomCard>
     </div>
   );

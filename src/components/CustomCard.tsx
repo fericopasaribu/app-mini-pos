@@ -15,9 +15,9 @@ export function CustomCard({
   return (
     <Card className={`area-card ${className}`}>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="card-title">{title}</CardTitle>
       </CardHeader>
-      <CardContent>{children}</CardContent>
+      <CardContent className="card-content">{children}</CardContent>
     </Card>
   );
 }

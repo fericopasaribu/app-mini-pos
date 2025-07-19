@@ -203,20 +203,17 @@
   }
 
   .area-footer {
-    /* background-color: var(--color-red); */
     @apply flex justify-center p-5 drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white;
   }
 
   .footer-text {
-    /* color: var(--color-white); */
-    /* font-size: var(--font-small); */
     font-family: var(--font-gotham);
     @apply text-sm;
   }
 
   .area-breadcrumb {
     font-family: var(--font-gotham);
-    @apply mb-4 flex justify-end text-sm;
+    @apply mb-4 flex justify-end sm:justify-start text-sm;
   }
 
   .breadcrumb-separator {
@@ -225,5 +222,14 @@
 
   .area-card {
     @apply min-h-[calc(100vh-226px)] sm:min-h-[calc(100vh-276px)];
+  }
+
+  .card-title {
+    font-family: var(--font-gotham);
+    @apply !font-normal text-[1em] sm:!text-[1.25em] text-sky-700 border-0 border-b-1 border-sky-700 border-dashed pb-4 text-center sm:text-justify;
+  }
+
+  .card-content {
+    @apply text-justify !mt-[-1em];
   }
 }
