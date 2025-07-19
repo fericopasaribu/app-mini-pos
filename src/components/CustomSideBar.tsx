@@ -21,43 +21,44 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { CUSTOM_TEXT } from "@/constants/CustomText";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // Menu items.
 const items = [
   {
-    title: "HOME",
+    title: `${CUSTOM_TEXT.menu_home.toUpperCase()}`,
     url: "/",
     icon: LayoutGrid,
   },
   {
-    title: "SATUAN",
-    url: "/satuan",
+    title: `${CUSTOM_TEXT.menu_satuan.toUpperCase()}`,
+    url: `/${CUSTOM_TEXT.menu_satuan.toLowerCase()}`,
     icon: Puzzle,
   },
   {
-    title: "BARANG",
-    url: "/barang",
+    title: `${CUSTOM_TEXT.menu_barang.toUpperCase()}`,
+    url: `/${CUSTOM_TEXT.menu_barang.toLowerCase()}`,
     icon: Box,
   },
   {
-    title: "PENJUALAN",
-    url: "/penjualan",
+    title: `${CUSTOM_TEXT.menu_penjualan.toUpperCase()}`,
+    url: `/${CUSTOM_TEXT.menu_penjualan.toLowerCase()}`,
     icon: ShoppingBasket,
   },
   {
-    title: "LINKS",
+    title: `${CUSTOM_TEXT.menu_links.toUpperCase()}`,
     icon: Links,
     children: [
       {
-        title: "GITHUB",
-        url: "/github",
+        title: `${CUSTOM_TEXT.menu_github.toUpperCase()}`,
+        url: `/${CUSTOM_TEXT.menu_github.toLowerCase()}`,
         icon: CircleSmall,
       },
       {
-        title: "VERCEL",
-        url: "/vercel",
+        title: `${CUSTOM_TEXT.menu_vercel.toUpperCase()}`,
+        url: `/${CUSTOM_TEXT.menu_vercel.toLowerCase()}`,
         icon: CircleSmall,
       },
     ],
@@ -75,8 +76,6 @@ export function CustomSideBar() {
       [title]: !prev[title],
     }));
   };
-
-  // if (!mounted) return null;
 
   return (
     <Sidebar className="!z-3">
@@ -103,13 +102,22 @@ export function CustomSideBar() {
                 const hasChildren = !!item.children;
                 const isChildActive =
                   hasChildren &&
-                  item.children?.some((child) => child.url === pathname);
+                  item.children?.some((child) =>
+                    pathname.startsWith(child.url)
+                  );
 
                 const isOpen = openSubmenus[item.title] ?? isChildActive;
-                const isActive = item.url === pathname || isChildActive;
+
+                const isActive =
+                  (item.url &&
+                    (pathname === item.url ||
+                      pathname.startsWith(item.url + "/"))) ||
+                  isChildActive;
+
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton className="menu-item" asChild>
+                      {/* menu */}
                       {hasChildren ? (
                         <button
                           onClick={() => toggleSubmenu(item.title)}
@@ -136,7 +144,7 @@ export function CustomSideBar() {
                       )}
                     </SidebarMenuButton>
 
-                    {/* Submenu jika ada dan sedang dibuka */}
+                    {/* submenu */}
                     {hasChildren && isOpen && (
                       <ul className="ml-6 mt-1 space-y-1 list-none">
                         {item.children.map((child) => {

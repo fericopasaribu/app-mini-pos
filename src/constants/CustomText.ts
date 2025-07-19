@@ -4,8 +4,26 @@ const format_isi = "Format Isi"
 export const CUSTOM_TEXT = {
   interval: 3000,
   size_2MB: 2 * 1024 * 1024,
-  text_company: "Company Name",
-  text_year: "2025",
+
+  app_name: "POS",
+  app_company: "Company Name",
+  app_year: "2025",
+
+  menu_home: "Home",
+  menu_satuan: "Satuan",
+  menu_barang: "Barang",
+  menu_penjualan: "Penjualan",
+  menu_links: "Links",
+  menu_github: "Github",
+  menu_vercel: "Vercel",
+
+  text_tampil_data: "Tampil Data",
+  text_tambah_data: "Tambah Data",
+  text_ubah_data: "Ubah Data",
+  text_hapus_data: "Hapus Data",
+  text_detail_data: "Detail Data",
+
+
   text_zoom_foto: "Zoom Foto",
   text_ya: "Ya",
   text_tidak: "Tidak",
@@ -25,11 +43,7 @@ export const CUSTOM_TEXT = {
   text_error_format: "Format File Tidak Sesuai !",
   text_error_size: "Ukuran File Tidak Sesuai !",
   text_pilih_file: "Pilih / Drop File",
-  text_tampil_data: "Tampil Data",
-  text_tambah_data: "Tambah Data",
-  text_ubah_data: "Ubah Data",
-  text_hapus_data: "Hapus Data",
-  text_detail_data: "Detail Data",
+
   text_refresh_data: "Refresh Data",
   text_cari_data: "Cari Data",
   text_loading: "Mohon Tunggu ...",

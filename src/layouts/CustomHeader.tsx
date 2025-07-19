@@ -17,7 +17,7 @@ export default function CustomHeader() {
         className="header-image"
         priority
       />
-      <div className="header-text">{CUSTOM_TEXT.text_company}</div>
+      <div className="header-text">{CUSTOM_TEXT.app_company}</div>
     </div>
   );
 }
