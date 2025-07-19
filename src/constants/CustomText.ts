@@ -22,13 +22,14 @@ export const CUSTOM_TEXT = {
   text_ubah_data: "Ubah Data",
   text_hapus_data: "Hapus Data",
   text_detail_data: "Detail Data",
+  
+  error_data_kosong: "Tidak Ditemukan !",
 
 
   text_zoom_foto: "Zoom Foto",
   text_ya: "Ya",
   text_tidak: "Tidak",
   text_informasi: "Informasi",
-  text_data_kosong: "Data Tidak Ditemukan !",
   text_data_pelanggan: `Data ${pelanggan}`,
   text_konfirmasi_hapus: "Ingin Dihapus ?",
   text_sukses_hapus: "Berhasil Dihapus",

@@ -217,7 +217,7 @@
   }
 
   .breadcrumb-separator {
-    @apply w-4 h-4 text-muted-foreground mx-1;
+    @apply w-3 h-3 text-gray-500 mx-1;
   }
 
   .area-card {
