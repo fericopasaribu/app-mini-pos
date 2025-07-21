@@ -12,11 +12,10 @@ export const GET = async () => {
     });
 
     if (data.length === 0) {
-
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: `Data ${CUSTOM_TEXT.menu_satuan} ${CUSTOM_TEXT.error_data_kosong}`,
+                message: `Data ${CUSTOM_TEXT.menu_satuan} ${CUSTOM_TEXT.info_data_kosong}`,
                 status: 404
             },
         },

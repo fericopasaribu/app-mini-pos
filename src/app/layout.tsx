@@ -1,5 +1,6 @@
 import { CustomSideBar } from "@/components/CustomSideBar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 import { CUSTOM_TEXT } from "@/constants/CustomText";
 import CustomFooter from "@/layouts/CustomFooter";
 import type { Metadata } from "next";
@@ -26,6 +27,7 @@ export default function RootLayout({
             <CustomFooter />
           </section>
         </SidebarProvider>
+        <Toaster />
       </body>
     </html>
   );
