@@ -44,18 +44,19 @@ export function CustomDeleteAlert({
           </AlertDialogTitle>
           <AlertDialogDescription className="alert-desc text-base">
             {`${source} : `}
-            <span className="text-[var(--color-error)]">{text}</span><br />
+            <span className="text-[var(--color-error)]">{text}</span>
+            <br />
             {CUSTOM_TEXT.info_konfirmasi_hapus}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="!justify-center">
           <AlertDialogCancel className="btn-alert-secondary">
-            {CUSTOM_TEXT.text_tidak}
+            {CUSTOM_TEXT.button_tidak}
           </AlertDialogCancel>
           <AlertDialogAction
             className="btn-alert-primary"
             onClick={() => onDelete()}>
-            {CUSTOM_TEXT.text_ya}
+            {CUSTOM_TEXT.button_ya}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

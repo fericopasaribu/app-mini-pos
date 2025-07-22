@@ -17,6 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { CUSTOM_TEXT } from "@/constants/CustomText";
+import { useSatuan } from "@/hooks/useSatuan";
 import { cn } from "@/lib/utils";
 import {
   ColumnDef,
@@ -28,6 +29,7 @@ import {
 import { CircleX } from "lucide-react";
 import { useEffect, useState } from "react";
 import { CustomInput } from "./CustomInput";
+import CustomLoading from "./CustomLoading";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -148,127 +150,130 @@ export function CustomDataTable<TData, TValue>({
   const total = filteredData.length;
   const pageCount = table.getPageCount();
 
+  const { isLoading } = useSatuan();
+
   return (
-    <div className="space-y-4">
-      <div className="area-search">
-        {data.length > 0 && (
-          <CustomInput
-            placeholder={CUSTOM_TEXT.text_cari_data}
-            value={filter}
-            onChange={(value) => {
-              setFilter(value);
-              setPagination((prev) => ({ ...prev, pageIndex: 0 }));
-              console.log(pageSize);
-            }}
-            className="input-search-text"
-            maxLength={100}
-          />
-        )}
+    <CustomLoading isLoading={isLoading}>
+      <div className="space-y-4">
+        <div className="area-search">
+          {data.length > 0 && (
+            <CustomInput
+              placeholder={CUSTOM_TEXT.text_cari_data}
+              value={filter}
+              onChange={(value) => {
+                setFilter(value);
+                setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+                console.log(pageSize);
+              }}
+              className="input-search-text"
+              maxLength={100}
+            />
+          )}
 
-        {total > 0 && (
-          <Select
-            value={String(pageSize)}
-            onValueChange={(value) =>
-              setPagination((prev) => ({
-                ...prev,
-                pageSize: Number(value),
-                pageIndex: 0,
-              }))
-            }>
-            <SelectTrigger className="input-select w-full sm:w-[184px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="input-select-content">
-              {[1, 50, data.length].map((size) => (
-                <SelectItem
-                  key={size}
-                  value={String(size)}
-                  className="input-select-item">
-                  {size === data.length ? "Seluruh" : `${size}`} Data
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
-      </div>
+          {total > 0 && (
+            <Select
+              value={String(pageSize)}
+              onValueChange={(value) =>
+                setPagination((prev) => ({
+                  ...prev,
+                  pageSize: Number(value),
+                  pageIndex: 0,
+                }))
+              }>
+              <SelectTrigger className="input-select w-full sm:w-[184px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="input-select-content">
+                {Array.from(new Set([10, 50, data.length])).map((size) => (
+                  <SelectItem
+                    key={size}
+                    value={String(size)}
+                    className="input-select-item">
+                    {size === data.length ? "Seluruh" : `${size}`} Data
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        </div>
 
-      {/* Table */}
-      {total > 0 ? (
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id}>
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        key={cell.id}
-                        className={cn(
-                          cell.column.columnDef.meta?.width,
-                          cell.column.columnDef.meta?.align === "center"
-                            ? "text-center"
-                            : cell.column.columnDef.meta?.align === "right"
-                            ? "text-right"
-                            : "text-left"
-                        )}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
+        {/* Table */}
+        {total > 0 ? (
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
                     ))}
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  {columns.map((column, index) => (
-                    <TableCell
-                      key={index}
-                      className={cn(column.meta?.width, "h-12")}
-                    />
-                  ))}
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-      ) : (
-        <div className="table-error">
-          <CircleX className="mr-2" />{" "}
-          {`Data ${error} ${CUSTOM_TEXT.info_data_kosong}`}
-        </div>
-      )}
-
-      {/* Pagination */}
-      {total > 0 && (
-        <div className="pagination-area">
-          <div className="pagination-info">
-            <span>
-              {`Data ${pageIndex * pageSize + 1} - ${Math.min(
-                (pageIndex + 1) * pageSize,
-                total
-              )} dari ${total} Data`}
-            </span>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell
+                          key={cell.id}
+                          className={cn(
+                            cell.column.columnDef.meta?.width,
+                            cell.column.columnDef.meta?.align === "center"
+                              ? "text-center"
+                              : cell.column.columnDef.meta?.align === "right"
+                              ? "text-right"
+                              : "text-left"
+                          )}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    {columns.map((column, index) => (
+                      <TableCell
+                        key={index}
+                        className={cn(column.meta?.width, "h-12")}
+                      />
+                    ))}
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
           </div>
+        ) : (
+          <div className="table-error">
+            <CircleX className="mr-2" />{" "}
+            {`Data ${error} ${CUSTOM_TEXT.info_data_kosong}`}
+          </div>
+        )}
 
-          <div className="pagination-control">
-            {/* <Button
+        {/* Pagination */}
+        {total > 0 && (
+          <div className="pagination-area">
+            <div className="pagination-info">
+              <span>
+                {`Data ${pageIndex * pageSize + 1} - ${Math.min(
+                  (pageIndex + 1) * pageSize,
+                  total
+                )} dari ${total} Data`}
+              </span>
+            </div>
+
+            <div className="pagination-control">
+              {/* <Button
               variant="outline"
               size="icon"
               className="pagination-nav"
@@ -276,42 +281,42 @@ export function CustomDataTable<TData, TValue>({
               disabled={pageIndex === 0}>
               &laquo;
             </Button> */}
-            <Button
-              variant="outline"
-              size="icon"
-              className="pagination-nav"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}>
-              &lsaquo;
-            </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="pagination-nav"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}>
+                &lsaquo;
+              </Button>
 
-            {getPaginationRange(pageIndex + 1, pageCount).map((item, index) =>
-              typeof item === "number" ? (
-                <Button
-                  key={index}
-                  variant={item === pageIndex + 1 ? "default" : "outline"}
-                  size="icon"
-                  className="pagination-page"
-                  onClick={() => table.setPageIndex(item - 1)}
-                  disabled={item === pageIndex + 1}>
-                  {item}
-                </Button>
-              ) : (
-                <span key={index} className="pagination-ellipsis">
-                  ...
-                </span>
-              )
-            )}
+              {getPaginationRange(pageIndex + 1, pageCount).map((item, index) =>
+                typeof item === "number" ? (
+                  <Button
+                    key={index}
+                    variant={item === pageIndex + 1 ? "default" : "outline"}
+                    size="icon"
+                    className="pagination-page"
+                    onClick={() => table.setPageIndex(item - 1)}
+                    disabled={item === pageIndex + 1}>
+                    {item}
+                  </Button>
+                ) : (
+                  <span key={index} className="pagination-ellipsis">
+                    ...
+                  </span>
+                )
+              )}
 
-            <Button
-              variant="outline"
-              size="icon"
-              className="pagination-nav"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}>
-              &rsaquo;
-            </Button>
-            {/* <Button
+              <Button
+                variant="outline"
+                size="icon"
+                className="pagination-nav"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}>
+                &rsaquo;
+              </Button>
+              {/* <Button
               variant="outline"
               size="icon"
               className="pagination-nav"
@@ -319,9 +324,10 @@ export function CustomDataTable<TData, TValue>({
               disabled={pageIndex === pageCount - 1}>
               &raquo;
             </Button> */}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </CustomLoading>
   );
 }

@@ -95,8 +95,9 @@
   --color-border: #a0a0a0;
   --color-sort: #888888;
   --color-error: #ef4444;
-  --color-success: #0ea5e9;
+  --color-success: #14b8a6;
   --color-detail: #64748b;
+  --padding-button: 1em 2.5em;
 }
 
 .dark {
@@ -291,32 +292,43 @@
   }
 
   .alert-desc {
-    @apply w-full text-center pt-1 pb-5 !text-[var(--color-black)];
+    @apply w-full text-center pt-1 !pb-4 !text-[var(--color-black)];
+  }
+
+  .area-large-button {
+    @apply flex justify-center mb-5 flex-col sm:flex-row;
   }
 
   .btn-primary,
   .btn-secondary {
-    padding: var(--gap-button);
+    padding: var(--padding-button);
     @apply rounded-full cursor-pointer transition duration-300 active:scale-95 outline-0 flex items-center justify-center gap-2 mb-5 w-full sm:w-52 sm:m-2 focus:!border-transparent focus:!ring-2 focus:!ring-[var(--color-sort)];
   }
 
   .btn-alert-primary,
   .btn-alert-secondary {
-    padding: var(--gap-button);
+    padding: var(--padding-button);
     @apply !rounded-full cursor-pointer transition duration-300 active:scale-95 outline-0 flex items-center justify-center mb-2.5 w-full !h-12 sm:w-30 sm:m-1 focus:!ring-0 focus:!ring-[var(--color-sort)];
   }
 
-  .btn-primary,
-  .btn-alert-primary {
-    border: 1px solid var(--color-success);
-    background-color: var(--color-success) !important;
+  .btn-primary {
     color: var(--color-white);
     margin-left: 0;
+    @apply bg-sky-700 border border-sky-700;
   }
 
-  .btn-primary:hover,
+  .btn-primary:hover {
+    @apply bg-sky-700;
+  }
+
+  .btn-alert-primary {
+    color: var(--color-white);
+    margin-left: 0;
+    @apply !bg-sky-700 border border-sky-700;
+  }
+
   .btn-alert-primary:hover {
-    background-color: var(--color-success) !important;
+    @apply bg-sky-700;
   }
 
   .btn-secondary,
@@ -349,7 +361,7 @@
 
   .toast-box-success {
     font-family: var(--font-inter) !important;
-    @apply bg-sky-50;
+    @apply bg-teal-50;
   }
 
   .toast-box-error {
@@ -385,6 +397,26 @@
 
   .pagination-control {
     @apply flex flex-wrap items-center justify-center gap-2;
+  }
+
+  .area-loading {
+    @apply flex justify-center items-center;
+  }
+
+  .area-form-content {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-5;
+  }
+
+  .area-form-button {
+    @apply flex mt-5 flex-col sm:flex-row;
+  }
+
+  .error-text {
+    @apply flex items-center mt-[-5px] text-[var(--color-error)] text-sm;
+  }
+
+  .error-icon {
+    @apply mr-2 w-4 h-4;
   }
 
   .area-footer {

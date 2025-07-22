@@ -2,35 +2,40 @@
 import { CustomBreadcrumb } from "@/components/CustomBreadCrumb";
 import { CustomCard } from "@/components/CustomCard";
 import { CustomDataTable } from "@/components/CustomDataTable";
+import CustomPrimaryLargeButton from "@/components/CustomPrimaryLargeButton";
+import CustomSecondaryLargeButton from "@/components/CustomSecondaryLargeButton";
 import { CUSTOM_TEXT } from "@/constants/CustomText";
 import { satuan } from "@/features/satuan";
-import axios from "axios";
-import useSWR from "swr";
+import { useSatuan } from "@/hooks/useSatuan";
+import { Plus, RefreshCcw } from "lucide-react";
 
 export default function ViewSatuanPage() {
-  // const [data, setData] = useState<tb_satuan[]>([]);
-
-  type Satuan = {
-    id: number;
-    nama: string;
-  };
-
-  type SatuanResponse = {
-    result: Satuan[];
-  };
-
-  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-
-  const { data } = useSWR<SatuanResponse>(CUSTOM_TEXT.api_satuan, fetcher);
+  const { data } = useSatuan();
 
   return (
     <div className="area-content">
       <CustomBreadcrumb />
       <CustomCard
         title={`${CUSTOM_TEXT.text_tampil_data} ${CUSTOM_TEXT.menu_satuan}`}>
+        <div className="area-large-button">
+          <CustomPrimaryLargeButton
+            path={CUSTOM_TEXT.link_satuan_add}
+            label={CUSTOM_TEXT.button_tambah_data}
+            className="btn-primary"
+            icon={Plus}
+          />
+
+          <CustomSecondaryLargeButton
+            label={CUSTOM_TEXT.button_refresh_data}
+            className="btn-secondary"
+            icon={RefreshCcw}
+            onClick={() => localStorage.removeItem(CUSTOM_TEXT.storage_satuan)}
+          />
+        </div>
+
         <CustomDataTable
           columns={satuan}
-          data={data?.result ?? []}
+          data={data ?? []}
           storage={CUSTOM_TEXT.storage_satuan}
           error={CUSTOM_TEXT.menu_satuan}
         />

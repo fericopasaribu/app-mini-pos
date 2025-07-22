@@ -14,7 +14,7 @@ type Satuan = {
 export const satuan: ColumnDef<Satuan>[] = [
   {
     id: "aksi",
-    header: () => <div className="text-center">{CUSTOM_TEXT.text_aksi}</div>,
+    header: () => <div className="text-center">{CUSTOM_TEXT.tabel_aksi}</div>,
     cell: ({ row }) => {
       const { id, nama } = row.original;
       return <ActionSatuan id={id} nama={nama} />;
@@ -31,7 +31,7 @@ export const satuan: ColumnDef<Satuan>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.text_nama}
+          {CUSTOM_TEXT.tabel_nama_satuan}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>

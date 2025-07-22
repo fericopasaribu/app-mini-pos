@@ -1,4 +1,3 @@
-const pelanggan = "Pelanggan";
 const format_isi = "Format Isi"
 
 export const CUSTOM_TEXT = {
@@ -23,6 +22,8 @@ export const CUSTOM_TEXT = {
   text_hapus_data: "Hapus Data",
   text_detail_data: "Detail Data",
   text_cari_data: "Cari Data",
+  text_loading: "Mohon Tunggu ...",
+  text_informasi: "Informasi",
 
   info_data_kosong: "Tidak Ditemukan !",
   info_konfirmasi_hapus: "Ingin Dihapus ?",
@@ -32,39 +33,34 @@ export const CUSTOM_TEXT = {
   info_gagal_simpan: "Gagal Disimpan !",
   info_sukses_ubah: "Berhasil Diubah",
   info_gagal_ubah: "Gagal Diubah !",
+  info_wajib_isi: "Harus Diisi !",
+  info_wajib_pilih: "Harus Dipilih !",
+  info_wajib_isi_pilih: "Harus Diisi / Dipilih !",
+  info_error_format: "Format File Tidak Sesuai !",
+  info_error_size: "Ukuran File Tidak Sesuai !",
+  info_pilih_file: "Pilih / Drop File",
+
+  button_tambah_data: "Tambah Data",
+  button_refresh_data: "Refresh Data",
+  button_simpan: "Simpan",
+  button_ubah: "Ubah",
+  button_batal: "Batal",
+  button_kembali: "Kembali",
+  button_ya: "Ya",
+  button_tidak: "Tidak",
+
+  tabel_aksi: "Aksi",
+  tabel_nama_satuan: "Satuan",
+
+  form_nama_satuan: "Nama Satuan",
 
   storage_satuan: "dt-satuan",
 
-  api_satuan : "/api/satuan",
+  link_satuan_add: "/satuan/add",
+  link_satuan_detail: "/satuan/detail",
+  link_satuan_edit: "/satuan/edit",
 
-
-  text_zoom_foto: "Zoom Foto",
-  text_ya: "Ya",
-  text_tidak: "Tidak",
-  text_informasi: "Informasi",
-  text_data_pelanggan: `Data ${pelanggan}`,
-  
-  text_wajib_isi: "Harus Diisi !",
-  text_wajib_pilih: "Harus Dipilih !",
-  text_wajib_isi_pilih: "Harus Diisi / Dipilih !",
-  text_error_format: "Format File Tidak Sesuai !",
-  text_error_size: "Ukuran File Tidak Sesuai !",
-  text_pilih_file: "Pilih / Drop File",
-
-  text_refresh_data: "Refresh Data",
-  text_loading: "Mohon Tunggu ...",
-  text_pelanggan: `${pelanggan}`,
-  text_aksi: "Aksi",
-  text_nomor: "Nomor",
-  text_nama: "Nama",
-  text_alamat: "Alamat",
-  text_telepon: "Telepon",
-  text_foto: "Foto",
-  text_simpan: "Simpan",
-  text_ubah: "Ubah",
-  text_batal: "Batal",
-  text_kembali: "Kembali",
-
+  api_satuan: "/api/satuan",
 
   format_isi_angka: `${format_isi} : 0-9`,
   format_isi_nama: `${format_isi} : a-zA-Z .,`,
@@ -77,6 +73,15 @@ export const CUSTOM_TEXT = {
   file_noimage: "noimage.png",
   file_loading: "loading.svg",
   file_404: "404.svg",
+
+
+
+
+  text_zoom_foto: "Zoom Foto",
+
+
+
+
 
   upload_label_format: "* Format File",
   upload_label_size: "* Ukuran File Maks.",
