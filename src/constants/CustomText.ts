@@ -3,7 +3,7 @@ const format_isi = "Format Isi"
 
 export const CUSTOM_TEXT = {
   time_interval: 3000,
-  size_2MB: 2 * 1024 * 1024,
+  size_2MB: 2097152,
 
   app_name: "POS",
   app_company: "Company Name",

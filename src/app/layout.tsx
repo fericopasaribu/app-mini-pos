@@ -23,11 +23,11 @@ export default function RootLayout({
           <CustomSideBar />
           <section className="area-main">
             <SidebarTrigger />
+            <Toaster />
             {children}
             <CustomFooter />
           </section>
         </SidebarProvider>
-        <Toaster />
       </body>
     </html>
   );

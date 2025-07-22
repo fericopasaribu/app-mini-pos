@@ -1,4 +1,3 @@
-import { CUSTOM_TEXT } from "@/constants/CustomText";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
@@ -11,16 +10,16 @@ export const GET = async () => {
         },
     });
 
-    if (data.length === 0) {
-        return NextResponse.json({
-            meta_data: {
-                success: false,
-                message: `Data ${CUSTOM_TEXT.menu_satuan} ${CUSTOM_TEXT.info_data_kosong}`,
-                status: 404
-            },
-        },
-            { status: 404 })
-    }
+    // if (data.length === 0) {
+    //     return NextResponse.json({
+    //         meta_data: {
+    //             success: false,
+    //             message: `Data ${CUSTOM_TEXT.menu_satuan} ${CUSTOM_TEXT.info_data_kosong}`,
+    //             status: 404
+    //         },
+    //     },
+    //         { status: 404 })
+    // }
 
     return NextResponse.json(
         {

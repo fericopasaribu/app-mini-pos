@@ -65,7 +65,7 @@ export function CustomDataTable<TData, TValue>({
   columns,
   data,
   storage,
-  error
+  error,
 }: DataTableProps<TData, TValue>) {
   const [isClient, setIsClient] = useState(false);
   const [filter, setFilter] = useState("");
@@ -78,9 +78,7 @@ export function CustomDataTable<TData, TValue>({
   // localStorage
   useEffect(() => {
     setIsClient(true);
-    const saved = JSON.parse(
-      localStorage.getItem(storage) || "{}"
-    );
+    const saved = JSON.parse(localStorage.getItem(storage) || "{}");
     setSorting(saved?.sorting ?? []);
     setPagination(saved?.pagination ?? { pageIndex: 0, pageSize: 10 });
     setFilter(saved?.globalFilter ?? "");
@@ -89,10 +87,7 @@ export function CustomDataTable<TData, TValue>({
   useEffect(() => {
     if (!isClient) return;
     const currentState = { globalFilter: filter, sorting, pagination };
-    localStorage.setItem(
-      storage,
-      JSON.stringify(currentState)
-    );
+    localStorage.setItem(storage, JSON.stringify(currentState));
   }, [filter, sorting, pagination, isClient, storage]);
 
   // Filtering
@@ -156,16 +151,20 @@ export function CustomDataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       <div className="area-search">
-        <CustomInput
-          placeholder={CUSTOM_TEXT.text_cari_data}
-          value={filter}
-          onChange={(value) => {
-            setFilter(value);
-            setPagination((prev) => ({ ...prev, pageIndex: 0 }));
-          }}
-          className="input-search-text"
-          maxLength={100}
-        />
+        {data.length > 0 && (
+          <CustomInput
+            placeholder={CUSTOM_TEXT.text_cari_data}
+            value={filter}
+            onChange={(value) => {
+              setFilter(value);
+              setPagination((prev) => ({ ...prev, pageIndex: 0 }));
+              console.log(pageSize);
+            }}
+            className="input-search-text"
+            maxLength={100}
+          />
+        )}
+
         {total > 0 && (
           <Select
             value={String(pageSize)}
@@ -180,7 +179,7 @@ export function CustomDataTable<TData, TValue>({
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="input-select-content">
-              {[10, 50, data.length].map((size) => (
+              {[1, 50, data.length].map((size) => (
                 <SelectItem
                   key={size}
                   value={String(size)}
@@ -194,7 +193,7 @@ export function CustomDataTable<TData, TValue>({
       </div>
 
       {/* Table */}
-      {total > 0 || !filter ? (
+      {total > 0 ? (
         <div className="rounded-md border">
           <Table>
             <TableHeader>
@@ -251,7 +250,8 @@ export function CustomDataTable<TData, TValue>({
         </div>
       ) : (
         <div className="table-error">
-          <CircleX className="mr-2" /> {`Data ${error} ${CUSTOM_TEXT.info_data_kosong}`}
+          <CircleX className="mr-2" />{" "}
+          {`Data ${error} ${CUSTOM_TEXT.info_data_kosong}`}
         </div>
       )}
 

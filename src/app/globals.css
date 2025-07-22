@@ -244,7 +244,7 @@
   }
 
   .table-error {
-    @apply flex items-center justify-center text-[var(--color-error)] text-base;
+    @apply flex items-center justify-center text-[var(--color-error)] text-sm;
   }
 
   .table-th-title {
@@ -339,7 +339,8 @@
     @apply order-1 sm:order-2;
   }
 
-  .toast-box-success, .toast-box-error {
+  .toast-box-success,
+  .toast-box-error {
     font-family: var(--font-inter) !important;
     @apply justify-center rounded-md
       px-10 py-5 border border-[var(--color-border)]
@@ -379,7 +380,7 @@
 
   .pagination-info {
     font-size: 1em;
-    @apply flex flex-col sm:flex-row items-center gap-2 text-[var(--color-black)] text-sm sm:text-base;
+    @apply flex flex-col sm:flex-row items-center gap-2 text-[var(--color-black)] text-sm;
   }
 
   .pagination-control {
@@ -398,23 +399,23 @@
 
 @layer utilities {
   .pagination-nav {
-    @apply border-[var(--color-border)] rounded-full text-lg cursor-pointer hover:bg-[var(--color-inactive)] focus:!border-transparent focus:!ring-2 focus:!ring-[var(--color-sort)] bg-transparent;
+    @apply border-[var(--color-border)] rounded-full text-xl cursor-pointer hover:bg-[var(--color-inactive)] focus:!border-transparent focus:!ring-2 focus:!ring-[var(--color-sort)] bg-transparent;
   }
 
   .pagination-ellipsis {
-    @apply px-2 text-gray-500;
+    @apply text-sm px-2 text-gray-500;
   }
 
   .pagination-page {
-    @apply border-[var(--color-border)] rounded-full text-sm sm:text-base focus:!border-transparent focus:!ring-2 focus:!ring-[var(--color-sort)];
+    @apply border-[var(--color-border)] rounded-full text-sm focus:!border-transparent focus:!ring-2 focus:!ring-[var(--color-sort)];
   }
 
   .pagination-page:not([data-state="checked"]) {
-    @apply cursor-pointer text-[var(--color-black)] hover:bg-[var(--color-inactive)] bg-transparent;
+    @apply cursor-pointer text-[var(--color-black)] hover:bg-[var(--color-inactive)] bg-transparent text-sm;
   }
 
   .pagination-page:disabled {
-    @apply !bg-sky-700 text-[var(--color-white)] opacity-100;
+    @apply !bg-sky-700 text-[var(--color-white)] opacity-100 text-sm;
   }
 
   .input-search-text {
