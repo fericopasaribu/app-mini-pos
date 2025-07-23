@@ -40,26 +40,36 @@ export function CustomBreadcrumb() {
 
   if (segments.length === 0) return <div className="area-breadcrumb">Home</div>;
 
-  const breadcrumbs = segments.map((segment, index) => {
-    const href = "/" + segments.slice(0, index + 1).join("/");
+  const breadcrumbs = segments
+    .map((segment, index) => {
+      const prev = segments[index - 1];
+      const isLast = index === segments.length - 1;
+      const isParamOfAction =
+        ["detail", "edit", "add"].includes(prev ?? "") && isLast;
 
-    const defaultLabel = segment
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (l) => l.toUpperCase());
+      if (isParamOfAction) return null;
 
-    const label =
-      typeof labelMap[segment] === "string"
-        ? (labelMap[segment] as string)
-        : typeof labelMap[segment] === "object" && index > 0
-        ? (labelMap[segment] as Record<string, string>)[segments[index - 1]] ||
-          defaultLabel
-        : defaultLabel;
+      const href = "/" + segments.slice(0, index + 1).join("/");
 
-    return {
-      label,
-      href,
-    };
-  });
+      const defaultLabel = segment
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+
+      const label =
+        typeof labelMap[segment] === "string"
+          ? (labelMap[segment] as string)
+          : typeof labelMap[segment] === "object" && index > 0
+          ? (labelMap[segment] as Record<string, string>)[
+              segments[index - 1]
+            ] || defaultLabel
+          : defaultLabel;
+
+      return {
+        label,
+        href,
+      };
+    })
+    .filter(Boolean);
 
   return (
     <Breadcrumb className="area-breadcrumb">
@@ -74,15 +84,15 @@ export function CustomBreadcrumb() {
       {breadcrumbs.map((crumb, idx) => {
         const isLast = idx === breadcrumbs.length - 1;
         return (
-          <div key={crumb.href} className="flex items-center">
+          <div key={crumb!.href} className="flex items-center">
             <ChevronRight className="breadcrumb-separator" />
             <BreadcrumbItem>
               {isLast ? (
-                <span>{crumb.label}</span>
+                <span>{crumb!.label}</span>
               ) : (
                 <BreadcrumbLink asChild>
-                  <Link href={crumb.href} className="!text-sky-700">
-                    {crumb.label}
+                  <Link href={crumb!.href} className="!text-sky-700">
+                    {crumb?.label}
                   </Link>
                 </BreadcrumbLink>
               )}

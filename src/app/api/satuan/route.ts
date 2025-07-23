@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export const GET = async () => {
     const data = await prisma.tb_satuan.findMany({
         orderBy: {
-            id: "asc",
+            nama: "asc",
         },
     });
 

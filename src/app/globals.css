@@ -96,7 +96,7 @@
   --color-sort: #888888;
   --color-error: #ef4444;
   --color-success: #14b8a6;
-  --color-detail: #64748b;
+  --color-warning: #F59E0B;
   --padding-button: 1em 2.5em;
 }
 
@@ -275,11 +275,11 @@
   }
 
   .btn-action-detail {
-    @apply bg-[var(--color-detail)] hover:!bg-[var(--color-detail)];
+    @apply bg-[var(--color-success)] hover:!bg-[var(--color-success)];
   }
 
   .btn-action-edit {
-    @apply bg-[var(--color-success)] hover:!bg-[var(--color-success)];
+    @apply bg-[var(--color-warning)] hover:!bg-[var(--color-warning)];
   }
 
   .btn-action-delete {

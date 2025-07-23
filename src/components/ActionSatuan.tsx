@@ -17,8 +17,8 @@ interface Props {
 export default function ActionSatuan({ id, nama }: Props) {
   const router = useRouter();
 
-  const handleDetail = () => router.push(`/detail/${id}`);
-  const handleEdit = () => router.push(`/edit/${id}`);
+  const handleDetail = () => router.push(`${CUSTOM_TEXT.link_satuan_detail}/${id}`);
+  const handleEdit = () => router.push(`${CUSTOM_TEXT.link_satuan_detail}/${id}`);
 
   const handleDelete = async () => {
     const response = await axios.delete(`${CUSTOM_TEXT.api_satuan}/${id}`);
