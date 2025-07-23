@@ -38,6 +38,7 @@ export const CUSTOM_TEXT = {
   info_wajib_isi_pilih: "Harus Diisi / Dipilih !",
   info_error_format: "Format File Tidak Sesuai !",
   info_error_size: "Ukuran File Tidak Sesuai !",
+  info_error_server: "Server Error !",
   info_pilih_file: "Pilih / Drop File",
 
   button_tambah_data: "Tambah Data",

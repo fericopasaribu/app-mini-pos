@@ -69,9 +69,9 @@ export default function AddSatuanPage() {
       } catch {
         CustomToast({
           type: "error",
-          source: `Data ${CUSTOM_TEXT.menu_satuan}`,
-          value: nama,
-          message: response.data.meta_data.message.name,
+          source: "Message",
+          value: CUSTOM_TEXT.info_error_server,
+          message: "",
           duration: CUSTOM_TEXT.time_interval,
         });
       }

@@ -17,8 +17,9 @@ interface Props {
 export default function ActionSatuan({ id, nama }: Props) {
   const router = useRouter();
 
-  const handleDetail = () => router.push(`${CUSTOM_TEXT.link_satuan_detail}/${id}`);
-  const handleEdit = () => router.push(`${CUSTOM_TEXT.link_satuan_detail}/${id}`);
+  const handleDetail = () =>
+    router.push(`${CUSTOM_TEXT.link_satuan_detail}/${id}`);
+  const handleEdit = () => router.push(`${CUSTOM_TEXT.link_satuan_edit}/${id}`);
 
   const handleDelete = async () => {
     const response = await axios.delete(`${CUSTOM_TEXT.api_satuan}/${id}`);
@@ -43,9 +44,9 @@ export default function ActionSatuan({ id, nama }: Props) {
     } catch {
       CustomToast({
         type: "error",
-        source: `Data ${CUSTOM_TEXT.menu_satuan}`,
-        value: nama,
-        message: response.data.meta_data.message.name,
+        source: "Message",
+        value: CUSTOM_TEXT.info_error_server,
+        message: "",
         duration: CUSTOM_TEXT.time_interval,
       });
     } finally {

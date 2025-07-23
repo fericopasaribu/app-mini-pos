@@ -4,23 +4,36 @@ import { NextRequest, NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export const GET = async () => {
-    const data = await prisma.tb_satuan.findMany({
-        orderBy: {
-            nama: "asc",
-        },
-    });
-
-    return NextResponse.json(
-        {
-            meta_data: {
-                success: true,
-                message: "",
-                status: 200
+    try {
+        const data = await prisma.tb_satuan.findMany({
+            orderBy: {
+                nama: "asc",
             },
-            result: data,
-        },
-        { status: 200 }
-    );
+        });
+
+        return NextResponse.json(
+            {
+                meta_data: {
+                    success: true,
+                    message: "",
+                    status: 200
+                },
+                result: data,
+            },
+            { status: 200 }
+        );
+    }
+    catch (error: unknown) {
+        return NextResponse.json({
+            meta_data: {
+                success: false,
+                message: error,
+                status: 400
+            },
+        }, {
+            status: 400
+        })
+    }
 };
 
 export const POST = async (request: NextRequest) => {
@@ -31,16 +44,15 @@ export const POST = async (request: NextRequest) => {
         const namaInput = formData.get("nama")?.toString() ?? "";
         const nama = namaInput.replace(/\s+/g, "").toLowerCase();
 
-        const data = await prisma.$queryRaw<{ nama: string }[]>`
+        const checkData = await prisma.$queryRaw<{ nama: string }[]>`
   SELECT nama FROM tb_satuan 
-  WHERE LOWER(REPLACE(nama, ' ', '')) = ${nama}
-`;
+  WHERE LOWER(REPLACE(nama, ' ', '')) = ${nama}`;
 
-        if (data.length == 1) {
+        if (checkData.length == 1) {
             return NextResponse.json({
                 meta_data: {
                     success: false,
-                    message: "Data Barang Gagal Disimpan.\nKode Barang Sudah Digunakan !",
+                    message: "Data Satuan Gagal Disimpan.\nNama Satuan Sudah Digunakan !",
                     status: 409
                 },
             },
@@ -56,7 +68,7 @@ export const POST = async (request: NextRequest) => {
         return NextResponse.json({
             meta_data: {
                 success: true,
-                message: "Data Barang Berhasil Disimpan",
+                message: "Data Satuan Berhasil Disimpan",
                 status: 201
             },
         },
