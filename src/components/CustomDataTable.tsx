@@ -91,11 +91,13 @@ export function CustomDataTable<TData, TValue>({
   }, [filter, sorting, pagination, isClient, storage]);
 
   // Filtering
-  const filteredData = data.filter((item) =>
-    Object.values(item as Record<string, unknown>)
-      .join(" ")
-      .toLowerCase()
-      .includes(filter.toLowerCase())
+  const filteredData = data.filter(
+    (item) =>
+      Object.values(item as Record<string, unknown>)
+        .join(" ")
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .includes(filter.toLowerCase().replace(/\s/g, ""))
   );
 
   // Sorting

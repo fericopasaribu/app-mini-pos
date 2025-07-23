@@ -1,11 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
 }
 
 datasource db {
@@ -14,6 +9,28 @@ datasource db {
 }
 
 model tb_satuan {
-  id   Int @id @default(autoincrement())
-  nama String @unique @db.VarChar(10)
+  id     Int         @id @default(autoincrement())
+  nama   String      @unique @db.VarChar(10)
+  barang tb_barang[]
+}
+
+model tb_barang {
+  id        Int       @id @default(autoincrement())
+  kode      String    @unique @db.VarChar(20)
+  nama      String    @db.VarChar(100)
+  harga     Int
+  foto      String    @db.VarChar(50)
+  id_satuan Int
+  satuan    tb_satuan @relation(fields: [id_satuan], references: [id], onDelete: Cascade)
+}
+
+view vw_barang {
+  id          Int     @id
+  kode        String? @db.VarChar(20)
+  nama        String? @db.VarChar(100)
+  harga       Int?
+  id_satuan   Int?
+  nama_satuan String? @db.VarChar(10)
+
+  @@map("vw_barang")
 }

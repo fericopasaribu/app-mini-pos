@@ -11,7 +11,6 @@ type SatuanResponse = {
   result: Satuan[];
 };
 
-// Pastikan fetcher sesuai struktur API kamu
 const fetcher = (url: string) =>
   axios.get<SatuanResponse>(url).then((res) => res.data.result);
 

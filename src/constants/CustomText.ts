@@ -36,6 +36,7 @@ export const CUSTOM_TEXT = {
   info_wajib_isi: "Harus Diisi !",
   info_wajib_pilih: "Harus Dipilih !",
   info_wajib_isi_pilih: "Harus Diisi / Dipilih !",
+  info_error_redudansi: "Sudah Digunakan !",
   info_error_format: "Format File Tidak Sesuai !",
   info_error_size: "Ukuran File Tidak Sesuai !",
   info_error_server: "Server Error !",
@@ -52,16 +53,24 @@ export const CUSTOM_TEXT = {
 
   tabel_aksi: "Aksi",
   tabel_nama_satuan: "Satuan",
+  tabel_kode_barang: "Kode",
+  tabel_nama_barang: "Barang",
+  tabel_harga_barang: "Harga",
 
   form_nama_satuan: "Nama Satuan",
 
   storage_satuan: "dt-satuan",
+  storage_barang: "dt-barang",
 
   link_satuan_add: "/satuan/add",
   link_satuan_detail: "/satuan/detail",
   link_satuan_edit: "/satuan/edit",
+  link_barang_add: "/barang/add",
+  link_barang_detail: "/barang/detail",
+  link_barang_edit: "/barang/edit",
 
   api_satuan: "/api/satuan",
+  api_barang: "/api/barang",
 
   format_isi_angka: `${format_isi} : 0-9`,
   format_isi_nama: `${format_isi} : a-zA-Z .,`,
