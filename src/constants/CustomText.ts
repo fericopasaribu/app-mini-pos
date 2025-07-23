@@ -55,7 +55,7 @@ export const CUSTOM_TEXT = {
   tabel_nama_satuan: "Satuan",
   tabel_kode_barang: "Kode",
   tabel_nama_barang: "Barang",
-  tabel_harga_barang: "Harga",
+  tabel_harga_barang: "Harga (Rp)",
 
   form_nama_satuan: "Nama Satuan",
 

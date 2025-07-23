@@ -3,6 +3,7 @@ SELECT
   barang.kode,
   barang.nama,
   barang.harga,
+  barang.foto,
   barang.id_satuan,
   satuan.nama AS nama_satuan
 FROM

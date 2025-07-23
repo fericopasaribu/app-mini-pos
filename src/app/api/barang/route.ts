@@ -45,21 +45,21 @@ export const GET = async () => {
 //         const nama = namaInput.replace(/\s+/g, "").toLowerCase();
 
 //         const checkData = await prisma.$queryRaw<{ nama: string }[]>`
-//   SELECT nama FROM tb_satuan 
+//   SELECT nama FROM tb_barang 
 //   WHERE LOWER(REPLACE(nama, ' ', '')) = ${nama}`;
 
 //         if (checkData.length == 1) {
 //             return NextResponse.json({
 //                 meta_data: {
 //                     success: false,
-//                     message: "Data Satuan Gagal Disimpan.\nNama Satuan Sudah Digunakan !",
+//                     message: "Data Barang Gagal Disimpan.\nKode Barang Sudah Digunakan !",
 //                     status: 200
 //                 },
 //             },
 //                 { status: 200 })
 //         }
 
-//         await prisma.tb_satuan.create({
+//         await prisma.tb_barang.create({
 //             data: {
 //                 nama: namaInput,
 //             }
@@ -68,7 +68,7 @@ export const GET = async () => {
 //         return NextResponse.json({
 //             meta_data: {
 //                 success: true,
-//                 message: "Data Satuan Berhasil Disimpan",
+//                 message: "Data Barang Berhasil Disimpan",
 //                 status: 201
 //             },
 //         },

@@ -25,12 +25,13 @@ model tb_barang {
 }
 
 view vw_barang {
-  id          Int     @id
-  kode        String? @db.VarChar(20)
-  nama        String? @db.VarChar(100)
-  harga       Int?
-  id_satuan   Int?
-  nama_satuan String? @db.VarChar(10)
+  id          Int    @id
+  kode        String @db.VarChar(20)
+  nama        String @db.VarChar(100)
+  harga       Int
+  foto        String @db.VarChar(50)
+  id_satuan   Int
+  nama_satuan String @db.VarChar(10)
 
   @@map("vw_barang")
 }
