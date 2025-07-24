@@ -49,7 +49,8 @@ export const POST = async (request: NextRequest) => {
         const checkData = await prisma.tb_barang.findUnique({
             where: {
                 kode: formData.get("kode")?.toString(),
-            }
+            },
+            select: { id: true },
         })
 
         if (checkData) {
@@ -57,10 +58,10 @@ export const POST = async (request: NextRequest) => {
                 meta_data: {
                     success: false,
                     message: "Data Barang Gagal Disimpan.\nKode Barang Sudah Digunakan !",
-                    status: 200
+                    status: 409
                 },
             },
-                { status: 200 })
+                { status: 409 })
         }
 
         let fileName = ""

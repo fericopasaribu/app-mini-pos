@@ -53,10 +53,10 @@ export const POST = async (request: NextRequest) => {
                 meta_data: {
                     success: false,
                     message: "Data Satuan Gagal Disimpan.\nNama Satuan Sudah Digunakan !",
-                    status: 200
+                    status: 409
                 },
             },
-                { status: 200 })
+                { status: 409 })
         }
 
         await prisma.tb_satuan.create({

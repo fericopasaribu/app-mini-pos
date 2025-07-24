@@ -257,7 +257,7 @@ function SidebarTrigger({
   const { toggleSidebar } = useSidebar();
 
   return (
-    <div className="!h-20 sm:!h-24 cursor-pointer sticky top-0 flex w-full justify-start drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white z-2">
+    <div className="!h-20 sm:!h-24 sticky top-0 flex w-full justify-start drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white z-2">
       <Button
         data-sidebar="trigger"
         data-slot="sidebar-trigger"
