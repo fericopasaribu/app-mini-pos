@@ -53,12 +53,12 @@ const items = [
     children: [
       {
         title: `${CUSTOM_TEXT.menu_github.toUpperCase()}`,
-        url: `/${CUSTOM_TEXT.menu_github.toLowerCase()}`,
+        url: `https://github.com/fericopasaribu`,
         icon: CircleSmall,
       },
       {
         title: `${CUSTOM_TEXT.menu_vercel.toUpperCase()}`,
-        url: `/${CUSTOM_TEXT.menu_vercel.toLowerCase()}`,
+        url: `https://vercel.com/fericopasaribu`,
         icon: CircleSmall,
       },
     ],
@@ -134,7 +134,7 @@ export function CustomSideBar() {
                         </button>
                       ) : (
                         <Link
-                          href={item.url}
+                          href={item.url}                          
                           className={`!px-3 !py-6 my-1 ${
                             isActive ? "menu-active" : ""
                           }`}>
@@ -154,6 +154,7 @@ export function CustomSideBar() {
                             <li key={child.title}>
                               <Link
                                 href={child.url}
+                                target={CUSTOM_TEXT.menu_github || CUSTOM_TEXT.menu_vercel ? "_blank" : "_self"}
                                 className={`menu-subitem ${
                                   isSubActive ? "menu-active" : ""
                                 }`}>
