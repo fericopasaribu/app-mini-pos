@@ -96,7 +96,7 @@
   --color-sort: #888888;
   --color-error: #ef4444;
   --color-success: #14b8a6;
-  --color-warning: #F59E0B;
+  --color-warning: #f59e0b;
   --padding-button: 1em 2.5em;
 }
 
@@ -147,8 +147,9 @@
 
 @layer components {
   .sidebar {
-    @apply !bg-sky-700 !ring-0 !outline-0  px-2.5;
+    @apply !bg-sky-700 !ring-0 !outline-0 px-2.5;
   }
+
   .menu-title {
     font-family: var(--font-gotham);
     font-size: 1em !important;
@@ -194,7 +195,7 @@
   }
 
   .header-image {
-    @apply w-12 h-12 ml-2 sm:w-16 sm:h-16 sm:ml-10;
+    @apply w-12 h-12 ml-0 sm:w-16 sm:h-16;
   }
 
   .header-text {
@@ -417,6 +418,10 @@
 
   .error-icon {
     @apply mr-2 w-4 h-4;
+  }
+
+  .area-upload {
+    @apply text-center text-sm italic text-[var(--color-border)] !mt-0 !mb-2 sm:!my-2;
   }
 
   .area-footer {

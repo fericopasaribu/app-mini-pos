@@ -26,7 +26,7 @@ model tb_barang {
 
 view vw_barang {
   id          Int    @id
-  kode        String @db.VarChar(20)
+  kode        String @unique @db.VarChar(20)
   nama        String @db.VarChar(100)
   harga       Int
   foto        String @db.VarChar(50)

@@ -140,7 +140,8 @@ function SidebarProvider({
             } as React.CSSProperties
           }
           className={cn(
-            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
+            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar",
+            "flex w-full min-h-screen max-h-screen overflow-y-auto",
             className
           )}
           {...props}>
@@ -256,14 +257,14 @@ function SidebarTrigger({
   const { toggleSidebar } = useSidebar();
 
   return (
-    <div className="!h-20 sm:!h-24 cursor-pointer sticky top-0 flex w-full justify-start drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white">
+    <div className="!h-20 sm:!h-24 cursor-pointer sticky top-0 flex w-full justify-start drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white z-2">
       <Button
         data-sidebar="trigger"
         data-slot="sidebar-trigger"
         variant="ghost"
         size="icon"
         className={cn(
-          "h-full items-center justify-start px-2 sm:hidden",
+          "h-full w-12 items-center justify-start !pl-5 pr-10 cursor-pointer hover:bg-transparent focus:!ring-0",
           className
         )}
         onClick={(event) => {

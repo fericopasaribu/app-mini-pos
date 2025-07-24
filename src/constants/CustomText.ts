@@ -24,6 +24,7 @@ export const CUSTOM_TEXT = {
   text_cari_data: "Cari Data",
   text_loading: "Mohon Tunggu ...",
   text_informasi: "Informasi",
+  text_zoom_foto: "Zoom Foto",
 
   info_data_kosong: "Tidak Ditemukan !",
   info_konfirmasi_hapus: "Ingin Dihapus ?",
@@ -41,6 +42,12 @@ export const CUSTOM_TEXT = {
   info_error_size: "Ukuran File Tidak Sesuai !",
   info_error_server: "Server Error !",
   info_pilih_file: "Pilih / Drop File",
+  info_file_label_format: "* Format File",
+  info_file_label_size: "* Ukuran File Maks.",
+  info_file_gambar_format: "JPG / JPEG / PNG",
+  info_file_gambar_size: "2 MB",
+  info_file_dokumen_format: "PDF",
+  info_file_dokumen_size: "5 MB",
 
   button_tambah_data: "Tambah Data",
   button_refresh_data: "Refresh Data",
@@ -58,6 +65,10 @@ export const CUSTOM_TEXT = {
   tabel_harga_barang: "Harga (Rp)",
 
   form_nama_satuan: "Nama Satuan",
+  form_kode_barang: "Kode Barang",
+  form_nama_barang: "Nama Barang",
+  form_harga_barang: "Harga Barang",
+  form_satuan_barang: "Satuan Barang",
 
   storage_satuan: "dt-satuan",
   storage_barang: "dt-barang",
@@ -73,8 +84,10 @@ export const CUSTOM_TEXT = {
   api_barang: "/api/barang",
 
   format_isi_angka: `${format_isi} : 0-9`,
-  format_isi_nama: `${format_isi} : a-zA-Z .,`,
   format_isi_angka_text: `${format_isi} : 0-9a-zA-Z -.,`,
+  format_isi_angka_text_plus: `${format_isi} : 0-9a-zA-Z '"-.,`,
+  format_isi_kode: `${format_isi} : a-zA-Z .,`,
+  format_isi_nama: `${format_isi} : 0-9a-zA-Z-.`,
 
   dir_images: "images",
   dir_uploads: "uploads",
@@ -83,20 +96,4 @@ export const CUSTOM_TEXT = {
   file_noimage: "noimage.png",
   file_loading: "loading.svg",
   file_404: "404.svg",
-
-
-
-
-  text_zoom_foto: "Zoom Foto",
-
-
-
-
-
-  upload_label_format: "* Format File",
-  upload_label_size: "* Ukuran File Maks.",
-  upload_gambar_format: "JPG / JPEG / PNG",
-  upload_gambar_size: "2 MB",
-  upload_dokumen_format: "PDF",
-  upload_dokumen_size: "5 MB",
 };

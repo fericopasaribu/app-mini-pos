@@ -1,4 +1,4 @@
-import { getMime } from "@/lib/mime";
+import { getMime } from "@/lib/mimes";
 import { readFile } from "fs/promises";
 import { NextRequest } from "next/server";
 import path from "path";

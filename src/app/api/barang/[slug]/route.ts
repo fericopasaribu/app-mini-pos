@@ -1,3 +1,4 @@
+import { CUSTOM_TEXT } from "@/constants/CustomText";
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import { unlink } from "fs/promises";
@@ -27,7 +28,7 @@ export const DELETE = async (_: NextRequest, props: { params: Promise<{ slug: st
             })
         }
 
-        const uploadDir = path.join(process.cwd(), "uploads")
+        const uploadDir = path.join(process.cwd(), CUSTOM_TEXT.dir_uploads)
         const fileName = checkData.foto
 
         if (fileName) {
