@@ -42,6 +42,7 @@ export default function ViewSatuanPage() {
             data={data ?? []}
             storage={CUSTOM_TEXT.storage_satuan}
             error={CUSTOM_TEXT.menu_satuan}
+            text={CUSTOM_TEXT.menu_satuan}
           />
         </CustomLoading>
       </CustomCard>

@@ -29,14 +29,14 @@ export default function AddBarangPage() {
     hargaRaw: number;
     hargaDisplay: string;
     foto: File | null;
-    id_satuan: string;
+    id_satuan: number;
   }>({
     kode: "",
     nama: "",
     hargaRaw: 0,
     hargaDisplay: "",
     foto: null,
-    id_satuan: "",
+    id_satuan: 0,
   });
 
   const [error, setError] = useState({
@@ -102,7 +102,7 @@ export default function AddBarangPage() {
             nama: "",
             hargaRaw: 0,
             hargaDisplay: "",
-            id_satuan: "",
+            id_satuan: 0,
             foto: null,
           });
           setSatuanId(null);

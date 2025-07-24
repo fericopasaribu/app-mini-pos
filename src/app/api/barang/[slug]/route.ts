@@ -66,49 +66,49 @@ export const DELETE = async (_: NextRequest, props: { params: Promise<{ slug: st
     }
 }
 
-// export const GET = async (_: NextRequest, props: { params: Promise<{ slug: string }> }) => {
-//     try {
-//         const { slug } = await props.params;
+export const GET = async (_: NextRequest, props: { params: Promise<{ slug: string }> }) => {
+    try {
+        const { slug } = await props.params;
 
-//         const getData = await prisma.tb_barang.findUnique({
-//             where: { id: Number(slug) },
-//         })
+        const getData = await prisma.vw_barang.findUnique({
+            where: { id: Number(slug) },
+        })
 
-//         if (!getData) {
-//             return NextResponse.json({
-//                 meta_data: {
-//                     success: false,
-//                     message: "Data Barang Tidak Ditemukan !",
-//                     status: 404
-//                 },
-//             }, {
-//                 status: 404
-//             })
-//         }
+        if (!getData) {
+            return NextResponse.json({
+                meta_data: {
+                    success: false,
+                    message: "Data Barang Tidak Ditemukan !",
+                    status: 404
+                },
+            }, {
+                status: 404
+            })
+        }
 
-//         return NextResponse.json({
-//             meta_data: {
-//                 success: true,
-//                 message: "",
-//                 status: 200
-//             },
-//             result: getData
-//         }, {
-//             status: 200
-//         })
-//     }
-//     catch (error: unknown) {
-//         return NextResponse.json({
-//             meta_data: {
-//                 success: false,
-//                 message: error,
-//                 status: 400
-//             },
-//         }, {
-//             status: 400
-//         })
-//     }
-// }
+        return NextResponse.json({
+            meta_data: {
+                success: true,
+                message: "",
+                status: 200
+            },
+            result: getData
+        }, {
+            status: 200
+        })
+    }
+    catch (error: unknown) {
+        return NextResponse.json({
+            meta_data: {
+                success: false,
+                message: error,
+                status: 400
+            },
+        }, {
+            status: 400
+        })
+    }
+}
 
 // export const PUT = async (request: NextRequest, props: { params: Promise<{ slug: string }> }) => {
 //     try {

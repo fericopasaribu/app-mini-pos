@@ -20,7 +20,7 @@ export const formatNumberAutoFraction = (text: number) => {
 
 export const formatThousand = (value: string): string => {
     const numeric = value.replace(/[^0-9]/g, '').replace(/^0+/, '');
-    return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // tambah titik tiap 3 angka
+    return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, "."); 
 };
 
 

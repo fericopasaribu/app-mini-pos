@@ -67,7 +67,7 @@ export const CUSTOM_TEXT = {
   form_nama_satuan: "Nama Satuan",
   form_kode_barang: "Kode Barang",
   form_nama_barang: "Nama Barang",
-  form_harga_barang: "Harga Barang",
+  form_harga_barang: "Harga Barang (Rp)",
   form_satuan_barang: "Satuan Barang",
 
   storage_satuan: "dt-satuan",
@@ -82,6 +82,7 @@ export const CUSTOM_TEXT = {
 
   api_satuan: "/api/satuan",
   api_barang: "/api/barang",
+  api_file: "/api/file",
 
   format_isi_angka: `${format_isi} : 0-9`,
   format_isi_angka_text: `${format_isi} : 0-9a-zA-Z -.,`,

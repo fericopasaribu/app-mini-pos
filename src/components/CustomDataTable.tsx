@@ -34,6 +34,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   storage: string;
   error: string;
+  text: string;
 }
 
 function getPaginationRange(
@@ -66,6 +67,7 @@ export function CustomDataTable<TData, TValue>({
   data,
   storage,
   error,
+  text,
 }: DataTableProps<TData, TValue>) {
   const [isClient, setIsClient] = useState(false);
   const [filter, setFilter] = useState("");
@@ -155,7 +157,7 @@ export function CustomDataTable<TData, TValue>({
       <div className="area-search">
         {data.length > 0 && (
           <CustomInput
-            placeholder={CUSTOM_TEXT.text_cari_data}
+            placeholder={`${CUSTOM_TEXT.text_cari_data} ${text}`}
             value={filter}
             onChange={(value) => {
               setFilter(value);

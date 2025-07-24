@@ -43,6 +43,7 @@ export default function ViewBarangPage() {
             data={data ?? []}
             storage={CUSTOM_TEXT.storage_barang}
             error={CUSTOM_TEXT.menu_barang}
+            text={CUSTOM_TEXT.menu_barang}
           />
         </CustomLoading>
       </CustomCard>
