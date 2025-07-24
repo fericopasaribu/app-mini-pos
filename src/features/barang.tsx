@@ -91,6 +91,14 @@ export const barang: ColumnDef<Barang>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const nama = row.getValue("nama") as string;
+      return (
+        <div className="truncate max-w-[600px] text-ellipsis overflow-hidden">
+          {nama}
+        </div>
+      );
+    },
     meta: { align: "justify", width: "w-[48%]" },
   },
 

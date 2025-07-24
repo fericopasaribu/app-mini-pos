@@ -6,7 +6,9 @@ import { cn } from "@/lib/utils";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <div data-slot="table-container" className="table-area overflow-auto sm:max-h-[60vh] max-h-[50vh]">
+    <div
+      data-slot="table-container"
+      className="table-area overflow-auto sm:max-h-[59vh] max-h-[49vh]">
       <table
         data-slot="table"
         className={cn("table-content", className)}
@@ -119,5 +121,6 @@ export {
   TableFooter,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 };
+
