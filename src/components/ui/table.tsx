@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <div data-slot="table-container" className="table-area">
+    <div data-slot="table-container" className="table-area overflow-auto sm:max-h-[60vh] max-h-[50vh]">
       <table
         data-slot="table"
         className={cn("table-content", className)}
@@ -23,7 +23,7 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
       className={cn(
         "[&_tr]:border-b [&_tr:hover]:bg-transparent",
         "[&_th]:bg-neutral-900 [&_th]:border-r [&_th]:text-center [&_th]:text-[var(--color-white)]",
-        "[&_th:first-child]:rounded-tl-md [&_th:last-child]:rounded-tr-md [&_th:last-child]:border-r-0",
+        "[&_th:first-child]:rounded-tl-md [&_th:last-child]:rounded-tr-md [&_th:last-child]:border-r-0 sticky top-0 bg-sky-700 z-1",
         className
       )}
       {...props}
