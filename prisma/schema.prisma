@@ -48,27 +48,25 @@ view vw_barang {
 }
 
 view vw_penjualan {
-  id             Int       @id
-  kode           String   @db.Char(20)
-  tanggal        DateTime
-  jumlah         Int
-  harga          Int
-  id_barang      Int
-  kode_barang    String   @db.VarChar(20)
-  nama_barang    String   @db.VarChar(100)
-  id_satuan      Int
-  nama_satuan    String   @db.VarChar(10)
-  tanggal_format String
+  id          Int      @id
+  kode        String   @db.Char(20)
+  tanggal     DateTime
+  jumlah      Int
+  harga       Int
+  id_barang   Int
+  kode_barang String   @db.VarChar(20)
+  nama_barang String   @db.VarChar(100)
+  id_satuan   Int
+  nama_satuan String   @db.VarChar(10)
 
   @@map("vw_penjualan")
 }
 
 view vw_penjualan_group {
-  kode           String    @id @db.Char(20)
-  tanggal        DateTime @db.Timestamp(6)
-  item           Int
-  total          Int
-  tanggal_format String
+  kode    String   @id @db.Char(20)
+  tanggal DateTime @db.Timestamp(6)
+  item    Int
+  total   Int
 
   @@map("vw_penjualan_group")
 }

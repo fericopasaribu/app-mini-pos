@@ -2,11 +2,7 @@ SELECT
   penjualan.kode,
   max(penjualan.tanggal) AS tanggal,
   count(penjualan.id) AS item,
-  sum(penjualan.harga) AS total,
-  to_char(
-    max(penjualan.tanggal),
-    'DD-MM-YYYY HH24:MI:SS' :: text
-  ) AS tanggal_format
+  sum(penjualan.harga) AS total
 FROM
   (
     (

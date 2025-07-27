@@ -1,27 +1,24 @@
 "use client";
 
-import ActionBarang from "@/components/ActionBarang";
+import ActionPenjualanGroup from "@/components/ActionPenjualanGroup";
 import { Button } from "@/components/ui/button";
 import { CUSTOM_TEXT } from "@/constants/CustomText";
-import { formatNumber } from "@/lib/scripts";
+import { formatDateTime, formatNumber } from "@/lib/scripts";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
-type Barang = {
+type PenjualanGroup = {
   id: number;
   kode: string;
-  nama: string;
-  harga: number;
-  nama_satuan: string;
 };
 
-export const barang: ColumnDef<Barang>[] = [
+export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
   {
     id: "aksi",
     header: () => <div className="text-center">{CUSTOM_TEXT.tabel_aksi}</div>,
     cell: ({ row }) => {
-      const { id, kode } = row.original;
-      return <ActionBarang id={id} kode={kode} />;
+      const { kode } = row.original;
+      return <ActionPenjualanGroup kode={kode} />;
     },
     meta: { align: "center", width: "w-[12%]" },
   },
@@ -35,7 +32,7 @@ export const barang: ColumnDef<Barang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_kode_barang}
+          {CUSTOM_TEXT.tabel_kode_penjualan_group}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -57,11 +54,11 @@ export const barang: ColumnDef<Barang>[] = [
         </Button>
       );
     },
-    meta: { align: "center", width: "w-[15%]" },
+    meta: { align: "center", width: "w-[26%]" },
   },
 
   {
-    accessorKey: "nama",
+    accessorKey: "tanggal",
     header: ({ column }) => {
       const sort = column.getIsSorted();
       return (
@@ -69,7 +66,7 @@ export const barang: ColumnDef<Barang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_nama_barang}
+          {CUSTOM_TEXT.tabel_tanggal_penjualan_group}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -92,18 +89,15 @@ export const barang: ColumnDef<Barang>[] = [
       );
     },
     cell: ({ row }) => {
-      const nama = row.getValue("nama") as string;
-      return (
-        <div className="truncate max-w-[600px] text-ellipsis overflow-hidden">
-          {nama}
-        </div>
-      );
+      const value = row.getValue("tanggal");
+      return <div className="text-center">{formatDateTime(String(value))}</div>;
     },
-    meta: { align: "justify", width: "w-[48%]" },
+
+    meta: { align: "center", width: "w-[26%]" },
   },
 
   {
-    accessorKey: "harga",
+    accessorKey: "item",
     header: ({ column }) => {
       const sort = column.getIsSorted();
       return (
@@ -111,7 +105,7 @@ export const barang: ColumnDef<Barang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_harga_barang}
+          {CUSTOM_TEXT.tabel_item_penjualan_group}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -134,44 +128,49 @@ export const barang: ColumnDef<Barang>[] = [
       );
     },
     cell: ({ row }) => {
-      const value = row.getValue("harga");
+      const value = row.getValue("item");
+      return <div className="text-center">{formatNumber(Number(value))}</div>;
+    },
+
+    meta: { align: "center", width: "w-[10%]" },
+  },
+
+  {
+    accessorKey: "total",
+    header: ({ column }) => {
+      const sort = column.getIsSorted();
+      return (
+        <Button
+          variant="ghost"
+          className="table-th-title p-7 text-[1em]"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          {CUSTOM_TEXT.tabel_total_penjualan_group}
+          <div className="table-th-sort">
+            {sort === "asc" ? (
+              <>
+                <ArrowUp className="table-th-sort-active" />
+                <ArrowDown className="table-th-sort-inactive" />
+              </>
+            ) : sort === "desc" ? (
+              <>
+                <ArrowUp className="table-th-sort-inactive" />
+                <ArrowDown className="table-th-sort-active" />
+              </>
+            ) : (
+              <>
+                <ArrowUp className="table-th-sort-inactive" />
+                <ArrowDown className="table-th-sort-inactive" />
+              </>
+            )}
+          </div>
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const value = row.getValue("total");
       return <div className="text-right">{formatNumber(Number(value))}</div>;
     },
 
-    meta: { align: "right", width: "w-[15%]" },
-  },
-
-  {
-    accessorKey: "nama_satuan",
-    header: ({ column }) => {
-      const sort = column.getIsSorted();
-      return (
-        <Button
-          variant="ghost"
-          className="table-th-title p-7 text-[1em]"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_nama_satuan}
-          <div className="table-th-sort">
-            {sort === "asc" ? (
-              <>
-                <ArrowUp className="table-th-sort-active" />
-                <ArrowDown className="table-th-sort-inactive" />
-              </>
-            ) : sort === "desc" ? (
-              <>
-                <ArrowUp className="table-th-sort-inactive" />
-                <ArrowDown className="table-th-sort-active" />
-              </>
-            ) : (
-              <>
-                <ArrowUp className="table-th-sort-inactive" />
-                <ArrowDown className="table-th-sort-inactive" />
-              </>
-            )}
-          </div>
-        </Button>
-      );
-    },
-    meta: { align: "center", width: "w-[10%]" },
+    meta: { align: "right", width: "w-[26%]" },
   },
 ];

@@ -1,3 +1,10 @@
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+// import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+// dayjs.extend(timezone);
+
 export const formatNumber = (text: number) => {
     return text.toLocaleString("id-ID")
 }
@@ -20,7 +27,12 @@ export const formatNumberAutoFraction = (text: number) => {
 
 export const formatThousand = (value: string): string => {
     const numeric = value.replace(/[^0-9]/g, '').replace(/^0+/, '');
-    return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, "."); 
+    return numeric.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
+
+export const formatDateTime = (value: string) => {
+    const dateTime = dayjs.utc(value).format("DD-MM-YYYY HH:mm:ss");
+    return dateTime;
 };
 
 

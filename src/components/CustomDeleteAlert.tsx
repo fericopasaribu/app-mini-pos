@@ -15,7 +15,7 @@ import { Info, Trash } from "lucide-react";
 
 interface CustomDeleteAlertProps {
   source: string;
-  id: number;
+  id: number | string;
   text: string;
   onDelete: () => void;
 }

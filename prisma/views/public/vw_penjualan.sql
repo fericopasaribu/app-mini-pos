@@ -8,11 +8,7 @@ SELECT
   barang.kode AS kode_barang,
   barang.nama AS nama_barang,
   barang.id_satuan,
-  satuan.nama AS nama_satuan,
-  to_char(
-    (penjualan.tanggal) :: timestamp without time zone,
-    'DD-MM-YYYY HH24:MI:SS' :: text
-  ) AS tanggal_format
+  satuan.nama AS nama_satuan
 FROM
   (
     (
