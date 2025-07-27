@@ -15,13 +15,24 @@ model tb_satuan {
 }
 
 model tb_barang {
-  id        Int       @id @default(autoincrement())
-  kode      String    @unique @db.VarChar(20)
-  nama      String    @db.VarChar(100)
+  id        Int            @id @default(autoincrement())
+  kode      String         @unique @db.VarChar(20)
+  nama      String         @db.VarChar(100)
   harga     Int
-  foto      String    @db.VarChar(50)
+  foto      String         @db.VarChar(50)
   id_satuan Int
-  satuan    tb_satuan @relation(fields: [id_satuan], references: [id], onDelete: Cascade)
+  satuan    tb_satuan      @relation(fields: [id_satuan], references: [id], onDelete: Cascade)
+  penjualan tb_penjualan[]
+}
+
+model tb_penjualan {
+  id        Int       @id @default(autoincrement())
+  kode      String    @db.Char(20)
+  harga     Int
+  id_barang Int
+  jumlah    Int
+  tanggal   DateTime
+  barang    tb_barang @relation(fields: [id_barang], references: [id], onDelete: Cascade)
 }
 
 view vw_barang {
@@ -34,4 +45,30 @@ view vw_barang {
   nama_satuan String @db.VarChar(10)
 
   @@map("vw_barang")
+}
+
+view vw_penjualan {
+  id             Int       @id
+  kode           String   @db.Char(20)
+  tanggal        DateTime
+  jumlah         Int
+  harga          Int
+  id_barang      Int
+  kode_barang    String   @db.VarChar(20)
+  nama_barang    String   @db.VarChar(100)
+  id_satuan      Int
+  nama_satuan    String   @db.VarChar(10)
+  tanggal_format String
+
+  @@map("vw_penjualan")
+}
+
+view vw_penjualan_group {
+  kode           String    @id @db.Char(20)
+  tanggal        DateTime @db.Timestamp(6)
+  item           Int
+  total          Int
+  tanggal_format String
+
+  @@map("vw_penjualan_group")
 }
