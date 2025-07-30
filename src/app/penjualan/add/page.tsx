@@ -2,35 +2,86 @@
 import { CustomBreadcrumb } from "@/components/CustomBreadCrumb";
 import CustomButton from "@/components/CustomButton";
 import { CustomCard } from "@/components/CustomCard";
+import { CustomDataTableDialogForm } from "@/components/CustomDataTableDialogForm";
 import { CustomError } from "@/components/CustomError";
 import { CustomInput } from "@/components/CustomInput";
 import { CustomLabel } from "@/components/CustomLabel";
 import CustomToast from "@/components/CustomToast";
 import { CUSTOM_TEXT } from "@/constants/CustomText";
-import { filterForName } from "@/lib/scripts";
+import { useDateTime } from "@/hooks/useDateTime";
+import { filterForNumber, formatNumber, formatThousand } from "@/lib/scripts";
 import axios from "axios";
 import { Ban, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { mutate } from "swr";
 
-export default function AddSatuanPage() {
+export default function AddPenjualanPage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const dateTime = useDateTime();
+
+  const dateTimeDisplay = dateTime.format("DD/MM/YY (HH:mm:ss)");
+  const dateTimeSave = dateTime.format("YYYY/MM/DD HH:mm:ss");
+
+  const [kode, setKode] = useState("");
+
+  useEffect(() => {
+    const storedKode = localStorage.getItem(CUSTOM_TEXT.storage_kode_penjualan);
+    setKode(String(storedKode));
+  }, []);
+
+  const [barang, setBarang] = useState<{
+    id: number;
+    kode: string;
+    nama: string;
+    harga: number;
+  } | null>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem(CUSTOM_TEXT.storage_selected_barang)) {
+      localStorage.removeItem(CUSTOM_TEXT.storage_selected_barang);
+    }
+
+    const loadBarang = () => {
+      const stored = localStorage.getItem(CUSTOM_TEXT.storage_selected_barang);
+      if (stored) {
+        setBarang(JSON.parse(stored));
+      }
+    };
+
+    loadBarang();
+
+    window.addEventListener("barang-selected", loadBarang);
+
+    return () => {
+      window.removeEventListener("barang-selected", loadBarang);
+    };
+  }, []);
+
   const router = useRouter();
 
   const [form, setForm] = useState<{
-    nama: string;
+    jumlahRaw: number;
+    jumlahDisplay: string;
   }>({
-    nama: "",
+    jumlahRaw: 0,
+    jumlahDisplay: "",
   });
 
   const [error, setError] = useState({
-    nama: false,
+    jumlah: false,
   });
 
-  const [errorRedudance, setErrorRedudance] = useState(false);
+  // const [errorRedudance, setErrorRedudance] = useState(false);
 
-  const handleSaveData = async (nama: string) => {
+  const handleSaveData = async (jumlah: number) => {
     const errorTemp = {
-      nama: !form.nama.trim(),
+      jumlah: !form.jumlahDisplay.trim(),
     };
 
     setError(errorTemp);
@@ -39,37 +90,50 @@ export default function AddSatuanPage() {
 
     if (isValid) {
       const formData = new FormData();
-      formData.append("nama", nama);
+      formData.append("kode", kode);
+      formData.append("tanggal", dateTimeSave);
+      formData.append("jumlah", String(jumlah));
+      formData.append("harga", String(barang!.harga));
+      formData.append("id_barang", String(barang!.id));
 
-      const response = await axios.post(`${CUSTOM_TEXT.api_satuan}`, formData, {
-        validateStatus: () => true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${CUSTOM_TEXT.api_penjualan}`,
+        formData,
+        {
+          validateStatus: () => true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       try {
         if (response.data.meta_data.success) {
           CustomToast({
             type: "success",
-            source: `Data ${CUSTOM_TEXT.menu_satuan}`,
-            value: nama,
+            source: `Data ${CUSTOM_TEXT.menu_penjualan}`,
+            value: "",
             message: CUSTOM_TEXT.info_sukses_simpan,
             duration: CUSTOM_TEXT.time_interval,
           });
 
-          setForm({ nama: "" });
-          setErrorRedudance(false);
+          setForm({ jumlahRaw: 0, jumlahDisplay: "" });
+          // setErrorRedudance(false);
+          if (localStorage.getItem(CUSTOM_TEXT.storage_selected_barang)) {
+            localStorage.removeItem(CUSTOM_TEXT.storage_selected_barang);
+          }
+
+          setBarang(null);
         } else {
           CustomToast({
             type: "error",
-            source: `Data ${CUSTOM_TEXT.menu_satuan}`,
-            value: nama,
+            source: `Data ${CUSTOM_TEXT.menu_penjualan}`,
+            value: "",
             message: CUSTOM_TEXT.info_gagal_simpan,
             duration: CUSTOM_TEXT.time_interval,
           });
 
-          setErrorRedudance(true);
+          // setErrorRedudance(true);
         }
       } catch {
         CustomToast({
@@ -80,7 +144,9 @@ export default function AddSatuanPage() {
           duration: CUSTOM_TEXT.time_interval,
         });
 
-        setErrorRedudance(false);
+        // setErrorRedudance(false);
+      } finally {
+        await mutate(`${CUSTOM_TEXT.api_search_barang}/${kode}`);
       }
     }
   };
@@ -89,32 +155,75 @@ export default function AddSatuanPage() {
     <div className="area-content">
       <CustomBreadcrumb />
       <CustomCard
-        title={`${CUSTOM_TEXT.text_tambah_data} ${CUSTOM_TEXT.menu_satuan}`}>
+        title={`${CUSTOM_TEXT.text_tambah_data} ${CUSTOM_TEXT.menu_penjualan}`}>
         <div className="area-form-content">
           <div>
-            <CustomLabel value={CUSTOM_TEXT.form_nama_satuan} required />
-            <CustomInput
-              value={form.nama}
-              onChange={(value) => {
-                const result = filterForName(value);
-                setForm({ ...form, nama: result });
-              }}
-              className={
-                error.nama || errorRedudance ? "input-error" : "input-text"
-              }
-              maxLength={10}
-              placeholder={CUSTOM_TEXT.format_isi_nama}
+            <CustomLabel value={CUSTOM_TEXT.form_kode_penjualan} />
+            <CustomInput value={kode} readOnly className="input-text" />
+          </div>
+
+          <div>
+            <CustomLabel value={CUSTOM_TEXT.form_tanggal_penjualan} />
+            <div
+              className={`flex items-center border rounded-md px-3 py-0 bg-gray-100 text-[var(--color-error)] input-text`}>
+              {mounted ? dateTimeDisplay : null}
+            </div>
+          </div>
+
+          <div>
+            <CustomLabel value={CUSTOM_TEXT.form_kode_barang} required />
+            <CustomDataTableDialogForm
+              title={`${CUSTOM_TEXT.text_cari_data} ${CUSTOM_TEXT.menu_barang}`}
+              kode={barang?.kode || ""}
             />
-            {error.nama ? (
+            {error.jumlah && (
               <CustomError
-                value={`${CUSTOM_TEXT.form_nama_satuan} ${CUSTOM_TEXT.info_wajib_isi}`}
+                value={`${CUSTOM_TEXT.form_kode_barang} ${CUSTOM_TEXT.info_wajib_pilih}`}
               />
-            ) : errorRedudance ? (
+            )}
+          </div>
+
+          <div>
+            <CustomLabel value={CUSTOM_TEXT.form_nama_barang} />
+            <CustomInput
+              value={barang?.nama || ""}
+              readOnly
+              className="input-text"
+            />
+          </div>
+
+          <div>
+            <CustomLabel value={CUSTOM_TEXT.form_harga_barang} required />
+            <CustomInput
+              value={
+                barang?.harga != null ? formatNumber(Number(barang.harga)) : ""
+              }
+              readOnly
+              className="input-text"
+            />
+          </div>
+
+          <div>
+            <CustomLabel value={CUSTOM_TEXT.form_jumlah_beli} />
+            <CustomInput
+              value={String(form.jumlahDisplay)}
+              onChange={(value) => {
+                const raw = filterForNumber(value);
+                const display = formatThousand(value);
+                setForm({
+                  ...form,
+                  jumlahRaw: Number(raw),
+                  jumlahDisplay: display,
+                });
+              }}
+              className={error.jumlah ? "input-error" : "input-text"}
+              maxLength={11}
+              placeholder={CUSTOM_TEXT.format_isi_angka}
+            />
+            {error.jumlah && (
               <CustomError
-                value={`${CUSTOM_TEXT.form_nama_satuan} ${CUSTOM_TEXT.info_error_redudansi}`}
+                value={`${CUSTOM_TEXT.form_jumlah_beli} ${CUSTOM_TEXT.info_wajib_isi}`}
               />
-            ) : (
-              ""
             )}
           </div>
         </div>
@@ -124,7 +233,7 @@ export default function AddSatuanPage() {
             label={CUSTOM_TEXT.button_simpan}
             className="btn-primary"
             icon={Check}
-            onClick={() => handleSaveData(form.nama)}
+            onClick={() => handleSaveData(form.jumlahRaw)}
           />
 
           <CustomButton

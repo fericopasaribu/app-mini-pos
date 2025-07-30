@@ -8,6 +8,7 @@ interface CustomPrimaryLargeButtonProps {
   path?: string;
   className?: string;
   icon?: LucideIcon;
+  onClick?: () => void;
 }
 
 export default function CustomPrimaryLargeButton({
@@ -15,11 +16,17 @@ export default function CustomPrimaryLargeButton({
   path = "",
   className = "",
   icon: Icon,
+  onClick,
 }: CustomPrimaryLargeButtonProps) {
   const router = useRouter();
 
+  const handleClick = () => {
+    if (onClick) onClick(); // jalankan fungsi tambahan
+    if (path) router.push(path); // tetap navigasi jika path ada
+  };
+
   return (
-    <button className={`${className}`} onClick={() => router.push(path)}>
+    <button className={`${className}`} onClick={handleClick}>
       {Icon && <Icon className="w-4 h-4" />}
       {label}
     </button>

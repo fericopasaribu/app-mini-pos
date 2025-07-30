@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-// import timezone from "dayjs/plugin/timezone";
+import timezone from "dayjs/plugin/timezone";
 
 dayjs.extend(utc);
-// dayjs.extend(timezone);
+dayjs.extend(timezone);
 
 export const formatNumber = (text: number) => {
     return text.toLocaleString("id-ID")
@@ -31,10 +31,14 @@ export const formatThousand = (value: string): string => {
 };
 
 export const formatDateTime = (value: string) => {
-    const dateTime = dayjs.utc(value).format("DD-MM-YYYY HH:mm:ss");
+    const dateTime = dayjs.utc(value).format("DD/MM/YYYY (HH:mm:ss)");
     return dateTime;
 };
 
+export const formatCode = (code: string) => {
+    const dateTime = dayjs().tz("Asia/Jakarta").format("YYMMDDHHmmss");
+    return `${code}-${dateTime}`;
+};
 
 export const filterForNumber = (value: string): string => {
     return value.replace(/[^0-9]/g, '');

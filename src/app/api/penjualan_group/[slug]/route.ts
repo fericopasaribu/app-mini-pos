@@ -12,7 +12,7 @@ export const DELETE = async (_: NextRequest, props: { params: Promise<{ slug: st
             select: { kode: true },
         })
 
-        if (!checkData) {
+        if (checkData.length == 0) {
             return NextResponse.json({
                 meta_data: {
                     success: false,

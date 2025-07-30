@@ -3,8 +3,7 @@ import axios from "axios";
 import useSWR from "swr";
 
 type PenjualanGroup = {
-  id: number;
-  nama: string;
+  kode: string;
 };
 
 type PenjualanGroupResponse = {

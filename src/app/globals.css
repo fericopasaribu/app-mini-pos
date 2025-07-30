@@ -425,7 +425,7 @@
   }
 
   .area-footer {
-    @apply flex justify-center p-5 drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white;
+    @apply flex justify-center m-0 p-5 drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] bg-white;
   }
 
   .footer-text {

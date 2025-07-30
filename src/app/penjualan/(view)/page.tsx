@@ -8,10 +8,20 @@ import CustomSecondaryLargeButton from "@/components/CustomSecondaryLargeButton"
 import { CUSTOM_TEXT } from "@/constants/CustomText";
 import { penjualan_group } from "@/features/penjualan_group";
 import { usePenjualanGroup } from "@/hooks/usePenjualanGroup";
+import { formatCode } from "@/lib/scripts";
+
 import { Plus, RefreshCcw } from "lucide-react";
 
 export default function ViewPenjualanPage() {
   const { data, isLoading } = usePenjualanGroup();
+
+  const handleCodeStorage = () => {
+    if (localStorage.getItem(CUSTOM_TEXT.storage_kode_penjualan)) {
+      localStorage.removeItem(CUSTOM_TEXT.storage_kode_penjualan);
+    }
+
+    localStorage.setItem(CUSTOM_TEXT.storage_kode_penjualan, formatCode("PJ"));
+  };
 
   return (
     <div className="area-content">
@@ -25,6 +35,7 @@ export default function ViewPenjualanPage() {
               label={CUSTOM_TEXT.button_tambah_data}
               className="btn-primary"
               icon={Plus}
+              onClick={handleCodeStorage}
             />
 
             <CustomSecondaryLargeButton

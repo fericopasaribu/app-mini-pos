@@ -1,25 +1,29 @@
 "use client";
 
-import ActionPenjualanGroup from "@/components/ActionPenjualanGroup";
+import ActionSearchBarang from "@/components/ActionSearchBarang";
 import { Button } from "@/components/ui/button";
 import { CUSTOM_TEXT } from "@/constants/CustomText";
-import { formatDateTime, formatNumber } from "@/lib/scripts";
+import { formatNumber } from "@/lib/scripts";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
-type PenjualanGroup = {
+type SearchBarang = {
+  id: number;
   kode: string;
+  nama: string;
+  harga: number;
+  nama_satuan: string;
 };
 
-export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
+export const search_barang: ColumnDef<SearchBarang>[] = [
   {
-    id: "aksi",
-    header: () => <div className="text-center">{CUSTOM_TEXT.tabel_aksi}</div>,
+    id: "pilih",
+    header: () => <div className="text-center">{CUSTOM_TEXT.tabel_pilih}</div>,
     cell: ({ row }) => {
-      const { kode } = row.original;
-      return <ActionPenjualanGroup kode={kode} />;
+      const { id, kode, nama, harga } = row.original;
+      return <ActionSearchBarang id={id} kode={kode} nama={nama} harga={harga} />;
     },
-    meta: { align: "center", width: "w-[12%]" },
+    meta: { align: "center", width: "w-[7%]" },
   },
 
   {
@@ -31,7 +35,7 @@ export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_kode_penjualan_group}
+          {CUSTOM_TEXT.tabel_kode_barang}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -53,11 +57,11 @@ export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
         </Button>
       );
     },
-    meta: { align: "center", width: "w-[29%]" },
+    meta: { align: "center", width: "w-[27%]" },
   },
 
   {
-    accessorKey: "tanggal",
+    accessorKey: "nama",
     header: ({ column }) => {
       const sort = column.getIsSorted();
       return (
@@ -65,7 +69,7 @@ export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_tanggal_penjualan_group}
+          {CUSTOM_TEXT.tabel_nama_barang}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -88,15 +92,18 @@ export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
       );
     },
     cell: ({ row }) => {
-      const value = row.getValue("tanggal");
-      return <div className="text-center">{formatDateTime(String(value))}</div>;
+      const nama = row.getValue("nama") as string;
+      return (
+        <div className="truncate max-w-[600px] text-ellipsis overflow-hidden">
+          {nama}
+        </div>
+      );
     },
-
-    meta: { align: "center", width: "w-[15%]" },
+    meta: { align: "justify", width: "w-[48%]" },
   },
 
   {
-    accessorKey: "item",
+    accessorKey: "harga",
     header: ({ column }) => {
       const sort = column.getIsSorted();
       return (
@@ -104,7 +111,7 @@ export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_item_penjualan_group}
+          {CUSTOM_TEXT.tabel_harga_barang}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -127,49 +134,11 @@ export const penjualan_group: ColumnDef<PenjualanGroup>[] = [
       );
     },
     cell: ({ row }) => {
-      const value = row.getValue("item");
-      return <div className="text-center">{formatNumber(Number(value))}</div>;
-    },
-
-    meta: { align: "center", width: "w-[15%]" },
-  },
-
-  {
-    accessorKey: "total",
-    header: ({ column }) => {
-      const sort = column.getIsSorted();
-      return (
-        <Button
-          variant="ghost"
-          className="table-th-title p-7 text-[1em]"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_total_penjualan_group}
-          <div className="table-th-sort">
-            {sort === "asc" ? (
-              <>
-                <ArrowUp className="table-th-sort-active" />
-                <ArrowDown className="table-th-sort-inactive" />
-              </>
-            ) : sort === "desc" ? (
-              <>
-                <ArrowUp className="table-th-sort-inactive" />
-                <ArrowDown className="table-th-sort-active" />
-              </>
-            ) : (
-              <>
-                <ArrowUp className="table-th-sort-inactive" />
-                <ArrowDown className="table-th-sort-inactive" />
-              </>
-            )}
-          </div>
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const value = row.getValue("total");
+      const value = row.getValue("harga");
       return <div className="text-right">{formatNumber(Number(value))}</div>;
     },
 
-    meta: { align: "right", width: "w-[29%]" },
+    meta: { align: "right", width: "w-[18%]" },
   },
+  
 ];
