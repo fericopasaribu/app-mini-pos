@@ -62,6 +62,6 @@ view vw_penjualan {
 view vw_penjualan_group {
   kode    String   @db.Char(15)
   tanggal DateTime @db.Timestamp(6)
-  item    BigInt
-  total   BigInt
+  item    Int
+  total   Int
 }
