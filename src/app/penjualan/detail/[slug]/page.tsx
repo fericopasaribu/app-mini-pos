@@ -62,18 +62,7 @@ export default function DetailPenjualanPage() {
 
     const storedKode = localStorage.getItem(CUSTOM_TEXT.storage_kode_penjualan);
     setKode(String(storedKode));
-  }, [fetchData, slug]);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem(CUSTOM_TEXT.storage_kode_penjualan)) {
-  //     localStorage.removeItem(CUSTOM_TEXT.storage_kode_penjualan);
-  //   }
-
-  //   localStorage.setItem(CUSTOM_TEXT.storage_kode_penjualan, String(slug));
-
-  //   const storedKode = localStorage.getItem(CUSTOM_TEXT.storage_kode_penjualan);
-  //   setKode(String(storedKode));
-  // }, [slug]);
+  }, [fetchData, slug]);  
 
   // search barang setup
   const { data } = usePenjualan();
