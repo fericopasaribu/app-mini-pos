@@ -23,9 +23,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install PostgreSQL Client
-        run: sudo apt-get update && sudo apt-get install -y postgresql-client
-
       - name: Clean and install dependencies
         run: |
           npm cache clean --force
@@ -34,12 +31,6 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
 
-      - name: Run Prisma Migrate Deploy
-        run: npx prisma migrate deploy
-
-      - name: Create Database Views
-        run: psql $DATABASE_URL -f prisma/sql/create_views.sql
-
       - name: Run Linter
         run: npm run lint
 
@@ -47,4 +38,5 @@ jobs:
         run: npm run build
 
       - name: Deploy to Vercel
-        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_TEAM }}
+        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_TEAM}}
+          
