@@ -9,10 +9,7 @@ import { ArrowDown, ArrowUp } from "lucide-react";
 
 type Barang = {
   id: number;
-  kode: string;
-  nama: string;
-  harga: number;
-  nama_satuan: string;
+  kode: string; 
 };
 
 export const barang: ColumnDef<Barang>[] = [
@@ -35,7 +32,7 @@ export const barang: ColumnDef<Barang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_kode_barang}
+          {CUSTOM_TEXT.tabel_kode}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -69,7 +66,7 @@ export const barang: ColumnDef<Barang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_nama_barang}
+          {CUSTOM_TEXT.tabel_barang}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -111,7 +108,7 @@ export const barang: ColumnDef<Barang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_harga_barang}
+          {CUSTOM_TEXT.tabel_harga}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -135,7 +132,7 @@ export const barang: ColumnDef<Barang>[] = [
     },
     cell: ({ row }) => {
       const value = row.getValue("harga");
-      return <div className="text-right">{formatNumber(Number(value))}</div>;
+      return formatNumber(Number(value));
     },
 
     meta: { align: "right", width: "w-[15%]" },
@@ -150,7 +147,7 @@ export const barang: ColumnDef<Barang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_nama_satuan}
+          {CUSTOM_TEXT.tabel_satuan}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>

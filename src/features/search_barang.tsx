@@ -12,7 +12,6 @@ type SearchBarang = {
   kode: string;
   nama: string;
   harga: number;
-  nama_satuan: string;
 };
 
 export const search_barang: ColumnDef<SearchBarang>[] = [
@@ -21,9 +20,11 @@ export const search_barang: ColumnDef<SearchBarang>[] = [
     header: () => <div className="text-center">{CUSTOM_TEXT.tabel_pilih}</div>,
     cell: ({ row }) => {
       const { id, kode, nama, harga } = row.original;
-      return <ActionSearchBarang id={id} kode={kode} nama={nama} harga={harga} />;
+      return (
+        <ActionSearchBarang id={id} kode={kode} nama={nama} harga={harga} />
+      );
     },
-    meta: { align: "center", width: "w-[7%]" },
+    meta: { align: "center", width: "w-[8%]" },
   },
 
   {
@@ -35,7 +36,7 @@ export const search_barang: ColumnDef<SearchBarang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_kode_barang}
+          {CUSTOM_TEXT.tabel_kode}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -69,7 +70,7 @@ export const search_barang: ColumnDef<SearchBarang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_nama_barang}
+          {CUSTOM_TEXT.tabel_barang}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -99,7 +100,7 @@ export const search_barang: ColumnDef<SearchBarang>[] = [
         </div>
       );
     },
-    meta: { align: "justify", width: "w-[48%]" },
+    meta: { align: "justify", width: "w-[47%]" },
   },
 
   {
@@ -111,7 +112,7 @@ export const search_barang: ColumnDef<SearchBarang>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_harga_barang}
+          {CUSTOM_TEXT.tabel_harga}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>
@@ -135,10 +136,9 @@ export const search_barang: ColumnDef<SearchBarang>[] = [
     },
     cell: ({ row }) => {
       const value = row.getValue("harga");
-      return <div className="text-right">{formatNumber(Number(value))}</div>;
+      return formatNumber(Number(value));
     },
 
     meta: { align: "right", width: "w-[18%]" },
   },
-  
 ];

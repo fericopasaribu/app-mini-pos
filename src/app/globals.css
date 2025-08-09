@@ -265,6 +265,10 @@
     color: var(--color-sort);
   }
 
+  .table-separator {
+    @apply  text-sky-700 border-0 border-b-1 border-sky-700 border-dashed mt-2 mb-6 sm:mt-5
+  }
+
   .area-btn-action {
     @apply flex items-center justify-center gap-2;
   }

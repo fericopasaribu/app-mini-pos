@@ -20,16 +20,20 @@ export default function ActionSearchBarang({ id, kode, nama, harga }: Props) {
     const data = {
       id,
       kode,
-      nama: nama,
-      harga: harga,
+      nama,
+      harga,
     };
+
+    if (localStorage.getItem(CUSTOM_TEXT.storage_selected_barang)) {
+      localStorage.removeItem(CUSTOM_TEXT.storage_selected_barang);
+    }
 
     localStorage.setItem(
       CUSTOM_TEXT.storage_selected_barang,
       JSON.stringify(data)
     );
 
-    window.dispatchEvent(new Event("barang-selected"));
+    window.dispatchEvent(new Event(CUSTOM_TEXT.storage_event_barang));
   };
 
   return (

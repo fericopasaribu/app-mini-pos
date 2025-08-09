@@ -43,7 +43,7 @@ export default function AddBarangPage() {
     kode: false,
     nama: false,
     harga: false,
-    id_satuan: false,
+    // id_satuan: false,
   });
 
   const [errorRedudance, setErrorRedudance] = useState(false);

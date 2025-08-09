@@ -7,39 +7,6 @@ dayjs.extend(utc);
 
 const prisma = new PrismaClient();
 
-export const GET = async () => {
-    try {
-        const data = await prisma.tb_satuan.findMany({
-            orderBy: {
-                nama: "asc",
-            },
-        });
-
-        return NextResponse.json(
-            {
-                meta_data: {
-                    success: true,
-                    message: "",
-                    status: 200
-                },
-                result: data,
-            },
-            { status: 200 }
-        );
-    }
-    catch (error: unknown) {
-        return NextResponse.json({
-            meta_data: {
-                success: false,
-                message: error,
-                status: 400
-            },
-        }, {
-            status: 400
-        })
-    }
-};
-
 export const POST = async (request: NextRequest) => {
     try {
 
@@ -89,7 +56,7 @@ export const POST = async (request: NextRequest) => {
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {

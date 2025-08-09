@@ -60,14 +60,14 @@ export const CUSTOM_TEXT = {
 
   tabel_aksi: "Aksi",
   tabel_pilih: "Pilih",
-  tabel_nama_satuan: "Satuan",
-  tabel_kode_barang: "Kode",
-  tabel_nama_barang: "Barang",
-  tabel_harga_barang: "Harga (Rp)",
-  tabel_kode_penjualan_group: "Kode",
-  tabel_tanggal_penjualan_group: "Tanggal",
-  tabel_item_penjualan_group: "Item",
-  tabel_total_penjualan_group: "Total (Rp)",
+  tabel_satuan: "Satuan",
+  tabel_kode: "Kode",
+  tabel_barang: "Barang",
+  tabel_harga: "Harga (Rp)",
+  tabel_tanggal: "Tanggal",
+  tabel_jumlah: "Jumlah",
+  tabel_item: "Item",
+  tabel_total: "Total (Rp)",
 
 
   form_nama_satuan: "Nama Satuan",
@@ -86,8 +86,16 @@ export const CUSTOM_TEXT = {
   storage_search_barang: "dt-search-barang",
   
   storage_selected_barang: "dt-selected-barang",
+  storage_selected_penjualan: "dt-selected-penjualan",
+  
+  storage_detail_penjualan: "dt-detail-penjualan",
   
   storage_kode_penjualan: "kd-penjualan",
+  
+  storage_event_barang: "ev-barang",  
+  storage_event_edit_penjualan: "ev-edit-penjualan",
+  
+
 
   link_satuan_add: "/satuan/add",
   link_satuan_detail: "/satuan/detail",

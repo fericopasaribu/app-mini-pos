@@ -8,7 +8,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
       data-slot="table-container"
-      className="table-area overflow-auto sm:max-h-[59vh] max-h-[49vh]">
+      className="table-area overflow-auto sm:max-h-[68vh] max-h-[58vh]">
       <table
         data-slot="table"
         className={cn("table-content", className)}

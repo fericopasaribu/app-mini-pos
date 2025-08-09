@@ -1,8 +1,8 @@
 SELECT
   penjualan.kode,
   max(penjualan.tanggal) AS tanggal,
-  count(penjualan.id) AS item,
-  sum(penjualan.harga) AS total
+  count(penjualan.jumlah) AS item,
+  sum((penjualan.harga * penjualan.jumlah)) AS total
 FROM
   (
     (

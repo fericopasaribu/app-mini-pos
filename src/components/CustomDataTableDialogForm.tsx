@@ -7,101 +7,23 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { X } from "lucide-react";
 import { CustomDataTable } from "./CustomDataTable";
+import { CustomError } from "./CustomError";
 import { CustomInput } from "./CustomInput";
 import CustomLoading from "./CustomLoading";
 
 interface CustomDataTableDialogFormProps {
   title: string;
+  text: string;
   kode: string;
-  // thumbnailSrc?: string;
-  // fullImageSrc?: string;
-  // alt?: string;
-  // thumbnailClassName?: string;
+  isError?: boolean;
 }
 
-export function CustomDataTableDialogForm({
-  // thumbnailSrc,
-  // fullImageSrc,
-  // alt = "",
-  // thumbnailClassName = "rounded-full object-cover w-full h-full lg:w-15 lg:h-15 hover:opacity-80 transition",
+export function CustomDataTableDialogForm({ 
   title,
+  text,
   kode,
+  isError = false,
 }: CustomDataTableDialogFormProps) {
-  // const [barang, setBarang] = useState<{
-  //   id: number;
-  //   kode: string;
-  // } | null>(null);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem(CUSTOM_TEXT.storage_selected_barang)) {
-  //     localStorage.removeItem(CUSTOM_TEXT.storage_selected_barang);
-  //   }
-
-  //   const loadBarang = () => {
-  //     const stored = localStorage.getItem(CUSTOM_TEXT.storage_selected_barang);
-  //     if (stored) {
-  //       try {
-  //         setBarang(JSON.parse(stored));
-  //       } catch (e) {
-  //         console.error("Failed to parse selected barang:", e);
-  //       }
-  //     }
-  //   };
-
-  //   loadBarang();
-
-  //   window.addEventListener("barang-selected", loadBarang);
-
-  //   return () => {
-  //     window.removeEventListener("barang-selected", loadBarang);
-  //   };
-  // }, []);
-
-  // const [isImageError, setIsImageError] = useState(false);
-  // const [isLoaded, setIsLoaded] = useState(false);
-
-  // const isValidImage = (src?: string) => {
-  //   return typeof src === "string" && src.trim() !== "" && !src.endsWith("/");
-  // };
-
-  // useEffect(() => {
-  //   if (!isValidImage(fullImageSrc)) {
-  //     setIsImageError(true);
-  //     return;
-  //   }
-
-  //   const img = new window.Image();
-  //   img.src = fullImageSrc;
-
-  //   img.onload = () => {
-  //     setIsImageError(false);
-  //     setIsLoaded(true);
-  //   };
-
-  //   img.onerror = () => {
-  //     setIsImageError(true);
-  //     setIsLoaded(false);
-  //   };
-  // }, [fullImageSrc]);
-
-  // if (!isValidImage(thumbnailSrc) || isImageError || !isLoaded) {
-  //   return (
-  //     <div className="w-full max-w-md mx-auto mb-17.5">
-  //       <div className="border border-[var(--color-border)] rounded-full transition w-56 h-56 relative mx-auto">
-  //         <div className="relative w-full h-full aspect-square flex justify-center items-center">
-  //           <Image
-  //             priority
-  //             src={`/${CUSTOM_TEXT.dir_images}/${CUSTOM_TEXT.file_noimage}`}
-  //             alt="No Image"
-  //             fill
-  //             sizes="300px"
-  //           />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   const { data, isLoading } = useSearchBarang();
 
   return (
@@ -111,10 +33,12 @@ export function CustomDataTableDialogForm({
           <CustomInput
             value={kode}
             readOnly
-            className="input-text"
+            className={isError ? "input-error" : "input-text"}
             showSearchIcon
-            // onSearchClick={() => alert("Klik icon search!")}
           />
+          {isError && (
+            <CustomError value={`${text} ${CUSTOM_TEXT.info_wajib_pilih}`} />
+          )}
         </div>
       </DialogPrimitive.Trigger>
 

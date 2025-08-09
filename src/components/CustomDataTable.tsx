@@ -93,13 +93,12 @@ export function CustomDataTable<TData, TValue>({
   }, [filter, sorting, pagination, isClient, storage]);
 
   // Filtering
-  const filteredData = data.filter(
-    (item) =>
-      Object.values(item as Record<string, unknown>)
-        .join(" ")
-        .toLowerCase()
-        .replace(/\s/g, "")
-        .includes(filter.toLowerCase().replace(/\s/g, ""))
+  const filteredData = data.filter((item) =>
+    Object.values(item as Record<string, unknown>)
+      .join(" ")
+      .toLowerCase()
+      .replace(/\s/g, "")
+      .includes(filter.toLowerCase().replace(/\s/g, ""))
   );
 
   // Sorting
@@ -183,14 +182,20 @@ export function CustomDataTable<TData, TValue>({
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="input-select-content">
-              {Array.from(new Set([10, 50, data.length])).map((size) => (
-                <SelectItem
-                  key={size}
-                  value={String(size)}
-                  className="input-select-item">
-                  {size === data.length ? "Seluruh" : `${size}`} Data
-                </SelectItem>
-              ))}
+              {Array.from(
+                new Set([10, 50, 100, data.length > 100 ? data.length : null])
+              )
+                .filter(Boolean)
+                .map((size) => (
+                  <SelectItem
+                    key={String(size)}
+                    value={String(size)}
+                    className="input-select-item">
+                    {size === data.length && data.length > 100
+                      ? "Seluruh Data"
+                      : `${size} Data`}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
         )}

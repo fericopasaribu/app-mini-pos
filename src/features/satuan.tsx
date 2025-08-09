@@ -31,7 +31,7 @@ export const satuan: ColumnDef<Satuan>[] = [
           variant="ghost"
           className="table-th-title p-7 text-[1em]"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          {CUSTOM_TEXT.tabel_nama_satuan}
+          {CUSTOM_TEXT.tabel_satuan}
           <div className="table-th-sort">
             {sort === "asc" ? (
               <>

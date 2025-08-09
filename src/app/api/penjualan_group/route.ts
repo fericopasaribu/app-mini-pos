@@ -22,16 +22,15 @@ export const GET = async () => {
             },
             { status: 200 }
         );
-    }
-    catch (error: unknown) {
+    } catch (error: unknown) {
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {
             status: 400
-        })
+        });
     }
 };

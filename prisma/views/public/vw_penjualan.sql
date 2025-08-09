@@ -1,14 +1,15 @@
 SELECT
   penjualan.id,
   penjualan.kode,
-  penjualan.tanggal,
-  penjualan.jumlah,
   penjualan.harga,
+  penjualan.jumlah,
+  penjualan.tanggal,
   penjualan.id_barang,
   barang.kode AS kode_barang,
   barang.nama AS nama_barang,
   barang.id_satuan,
-  satuan.nama AS nama_satuan
+  satuan.nama AS nama_satuan,
+  (penjualan.harga * penjualan.jumlah) AS total
 FROM
   (
     (

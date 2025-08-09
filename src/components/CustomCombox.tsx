@@ -86,7 +86,7 @@ export function CustomCombobox({
         sideOffset={10}
         align="start"
         className="sm:min-w-[500] sm:w-[--radix-popover-trigger-width] p-0 border-[var(--color-border)]">
-        <div className="overflow-y-auto max-h-75 m-2 rounded-md">
+        <div className="overflow-y-auto max-h-75 m-0 rounded-md">
           {" "}
           <Command className="pt-1">
             <CommandInput
@@ -100,7 +100,7 @@ export function CustomCombobox({
               </div>
             </CommandEmpty>
 
-            <CommandGroup className="!p-1 !pt-3">
+            <CommandGroup className="!p-1">
               {items.map((item) => (
                 <CommandItem
                   key={item.id}

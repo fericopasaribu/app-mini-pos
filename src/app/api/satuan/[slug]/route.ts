@@ -42,7 +42,7 @@ export const DELETE = async (_: NextRequest, props: { params: Promise<{ slug: st
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {
@@ -86,7 +86,7 @@ export const GET = async (_: NextRequest, props: { params: Promise<{ slug: strin
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {
@@ -158,7 +158,7 @@ export const PUT = async (request: NextRequest, props: { params: Promise<{ slug:
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {

@@ -7,12 +7,12 @@ export const DELETE = async (_: NextRequest, props: { params: Promise<{ slug: st
     try {
         const { slug } = await props.params;
 
-        const checkData = await prisma.tb_penjualan.findMany({
+        const checkData = await prisma.tb_penjualan.findFirst({
             where: { kode: slug },
             select: { kode: true },
         })
 
-        if (checkData.length == 0) {
+        if (!checkData) {
             return NextResponse.json({
                 meta_data: {
                     success: false,
@@ -42,7 +42,7 @@ export const DELETE = async (_: NextRequest, props: { params: Promise<{ slug: st
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {

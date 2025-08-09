@@ -31,7 +31,7 @@ export const GET = async () => {
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {
@@ -111,7 +111,7 @@ export const POST = async (request: NextRequest) => {
         return NextResponse.json({
             meta_data: {
                 success: false,
-                message: error,
+                message: error instanceof Error ? error.message : "Unknown error",
                 status: 400
             },
         }, {

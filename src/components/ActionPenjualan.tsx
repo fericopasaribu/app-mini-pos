@@ -2,33 +2,58 @@
 
 import { CUSTOM_TEXT } from "@/constants/CustomText";
 import axios from "axios";
-import { LayoutGrid } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Pencil } from "lucide-react";
 import { mutate } from "swr";
 import { CustomDeleteAlert } from "./CustomDeleteAlert";
 import CustomToast from "./CustomToast";
 import { Button } from "./ui/button";
 
 interface Props {
+  id: number;
   kode: string;
+  kode_barang: string;
+  nama_barang: string;
+  harga: number;
+  jumlah: number;
 }
 
-export default function ActionPenjualanGroup({ kode }: Props) {
-  const router = useRouter();
+export default function ActionPenjualan({
+  id,
+  kode,
+  kode_barang,
+  nama_barang,
+  harga,
+  jumlah,
+}: Props) {
+  const handleEdit = () => {
+    const dataEdit = {
+      id_barang: id,
+      kode_barang,
+      nama: nama_barang,
+      harga,
+      jumlah,
+    };
 
-  const handleDetail = () =>
-    router.push(`${CUSTOM_TEXT.link_penjualan_detail}/${kode}`);
+    if (localStorage.getItem(CUSTOM_TEXT.storage_selected_penjualan)) {
+      localStorage.removeItem(CUSTOM_TEXT.storage_selected_penjualan);
+    }
+
+    localStorage.setItem(
+      CUSTOM_TEXT.storage_selected_penjualan,
+      JSON.stringify(dataEdit)
+    );
+
+    window.dispatchEvent(new Event(CUSTOM_TEXT.storage_event_edit_penjualan));
+  };
 
   const handleDelete = async () => {
-    const response = await axios.delete(
-      `${CUSTOM_TEXT.api_penjualan_group}/${kode}`
-    );
+    const response = await axios.delete(`${CUSTOM_TEXT.api_penjualan}/${id}`);
     try {
       if (response.data.meta_data.success) {
         CustomToast({
           type: "success",
           source: `Data ${CUSTOM_TEXT.menu_penjualan}`,
-          value: kode,
+          value: `${kode} (${kode_barang})`,
           message: CUSTOM_TEXT.info_sukses_hapus,
           duration: CUSTOM_TEXT.time_interval,
         });
@@ -36,7 +61,7 @@ export default function ActionPenjualanGroup({ kode }: Props) {
         CustomToast({
           type: "error",
           source: `Data ${CUSTOM_TEXT.menu_penjualan}`,
-          value: kode,
+          value: `${kode} (${kode_barang})`,
           message: CUSTOM_TEXT.info_gagal_hapus,
           duration: CUSTOM_TEXT.time_interval,
         });
@@ -50,7 +75,8 @@ export default function ActionPenjualanGroup({ kode }: Props) {
         duration: CUSTOM_TEXT.time_interval,
       });
     } finally {
-      await mutate(CUSTOM_TEXT.api_penjualan_group);
+      await mutate(`${CUSTOM_TEXT.api_search_barang}/${kode}`);
+      await mutate(`${CUSTOM_TEXT.api_penjualan}/${kode}`);
     }
   };
 
@@ -58,16 +84,16 @@ export default function ActionPenjualanGroup({ kode }: Props) {
     <div className="area-btn-action">
       <Button
         variant="ghost"
-        className="btn-action-detail"
-        title={CUSTOM_TEXT.text_detail_data}
-        onClick={handleDetail}>
-        <LayoutGrid />
+        className="btn-action-edit"
+        title={CUSTOM_TEXT.text_ubah_data}
+        onClick={handleEdit}>
+        <Pencil />
       </Button>
 
       <CustomDeleteAlert
         source={`Data ${CUSTOM_TEXT.menu_penjualan}`}
-        id={kode}
-        text={kode}
+        id={id}
+        text={`${kode} (${kode_barang})`}
         onDelete={handleDelete}
       />
     </div>
