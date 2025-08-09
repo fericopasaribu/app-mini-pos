@@ -4,7 +4,7 @@ export const CUSTOM_TEXT = {
   time_interval: 3000,
   size_2MB: 2097152,
 
-  app_name: "POS",
+  app_name: "Mini POS",
   app_company: "Company Name",
   app_year: "2025",
 
