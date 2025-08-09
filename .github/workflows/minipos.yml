@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build & Test Mini POS
+    name: Build & Deploy Mini POS
     runs-on: ubuntu-latest
 
     env:
@@ -38,5 +38,5 @@ jobs:
         run: npm run build
 
       - name: Deploy to Vercel
-        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_TEAM}}
           
