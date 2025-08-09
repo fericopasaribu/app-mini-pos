@@ -36,14 +36,19 @@ Start by opening your terminal or command prompt.
     ```
 - Rename ``` .env.example ``` file to ``` .env ``` 
     
-- Open the ``` .env ``` and update the ``` DATABASE_URL ``` configuration to match your PostgreSQL username, password, and database name.
+- Open the ``` .env ``` file and update the ``` DATABASE_URL ``` configuration to match your PostgreSQL username, password, and database name.
     ```bash
     DATABASE_URL="postgresql://username:password@localhost:5432/db_pos?schema=public"
     ```
     
+- Open the ``` package.json ``` and update the ``` "migrate" ``` configuration to match your PostgreSQL username, password, and database name.
+    ```bash
+    "migrate": "npx prisma migrate dev && psql \"postgresql://username:password@localhost:5432/db_pos\" -f prisma/sql/create_views.sql"
+    ```
+    
 - Run the following command to apply the database migrations
     ```bash
-    npx prisma migrate dev
+    npx run migrate
     ```
     
 - Run the following command in the terminal
