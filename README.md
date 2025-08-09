@@ -41,7 +41,7 @@ Start by opening your terminal or command prompt.
     DATABASE_URL="postgresql://username:password@localhost:5432/db_pos?schema=public"
     ```
     
-- Open the ``` package.json ``` and update the ``` "migrate" ``` configuration to match your PostgreSQL username, password, and database name.
+- Open the ``` package.json ``` file and update the ``` "migrate" ``` configuration to match your PostgreSQL username, password, and database name.
     ```bash
     "migrate": "npx prisma migrate dev && psql \"postgresql://username:password@localhost:5432/db_pos\" -f prisma/sql/create_views.sql"
     ```
