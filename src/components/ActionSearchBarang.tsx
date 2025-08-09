@@ -42,7 +42,7 @@ export default function ActionSearchBarang({ id, kode, nama, harga }: Props) {
         <Button
           variant="ghost"
           className="btn-action-detail"
-          title={CUSTOM_TEXT.text_detail_data}
+          title={CUSTOM_TEXT.text_pilih_data}
           onClick={handleSelect}>
           <Check />
         </Button>

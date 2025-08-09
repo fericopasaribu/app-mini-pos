@@ -40,7 +40,6 @@ export default function DetailBarangPage() {
       validateStatus: () => true,
     });
 
-    console.log(response.data.result);
     try {
       if (response.data.meta_data.success) {
         setForm({

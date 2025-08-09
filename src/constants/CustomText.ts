@@ -21,6 +21,7 @@ export const CUSTOM_TEXT = {
   text_ubah_data: "Ubah Data",
   text_hapus_data: "Hapus Data",
   text_detail_data: "Detail Data",
+  text_pilih_data: "Pilih Data",
   text_cari_data: "Cari Data",
   text_loading: "Mohon Tunggu ...",
   text_informasi: "Informasi",
@@ -95,7 +96,6 @@ export const CUSTOM_TEXT = {
   storage_event_barang: "ev-barang",  
   storage_event_edit_penjualan: "ev-edit-penjualan",
   
-
 
   link_satuan_add: "/satuan/add",
   link_satuan_detail: "/satuan/detail",

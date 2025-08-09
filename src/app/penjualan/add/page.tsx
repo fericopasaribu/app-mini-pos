@@ -20,6 +20,8 @@ import { useEffect, useState } from "react";
 import { mutate } from "swr";
 
 export default function AddPenjualanPage() {
+  const router = useRouter();
+  
   // waktu setup
   const dateTime = useDateTime();
 
@@ -126,8 +128,6 @@ export default function AddPenjualanPage() {
   };
 
   // form setup
-  const router = useRouter();
-
   const [form, setForm] = useState<{
     jumlahRaw: number;
     jumlahDisplay: string;
@@ -190,7 +190,9 @@ export default function AddPenjualanPage() {
             type: "success",
             source: `Data ${CUSTOM_TEXT.menu_penjualan}`,
             value: `${kode} (${barang?.kode})`,
-            message: isEdit ? CUSTOM_TEXT.info_sukses_ubah : CUSTOM_TEXT.info_sukses_simpan,
+            message: isEdit
+              ? CUSTOM_TEXT.info_sukses_ubah
+              : CUSTOM_TEXT.info_sukses_simpan,
             duration: CUSTOM_TEXT.time_interval,
           });
 
@@ -200,7 +202,9 @@ export default function AddPenjualanPage() {
             type: "error",
             source: `Data ${CUSTOM_TEXT.menu_penjualan}`,
             value: `${kode} (${barang?.kode})`,
-            message: isEdit ? CUSTOM_TEXT.info_gagal_ubah : CUSTOM_TEXT.info_gagal_simpan,
+            message: isEdit
+              ? CUSTOM_TEXT.info_gagal_ubah
+              : CUSTOM_TEXT.info_gagal_simpan,
             duration: CUSTOM_TEXT.time_interval,
           });
         }
@@ -240,8 +244,6 @@ export default function AddPenjualanPage() {
     };
 
     setError(errorTemp);
-
-    // return Object.values(errorTemp).every((v) => v === false);
   };
 
   return (
