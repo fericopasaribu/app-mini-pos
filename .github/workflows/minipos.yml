@@ -38,5 +38,5 @@ jobs:
         run: npm run build
 
       - name: Deploy to Vercel
-        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_TEAM}}
+        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
           
