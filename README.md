@@ -48,7 +48,7 @@ Start by opening your terminal or command prompt.
     
 - Run the following command to apply the database migrations
     ```bash
-    npx run migrate
+    npm run migrate
     ```
     
 - Run the following command in the terminal
