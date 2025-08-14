@@ -1,6 +1,8 @@
 # Mini POS (Point of Sale) App
 
-A web application for managing mini POS built using NextJS.
+Web application for managing mini POS built using NextJS.
+
+---
 
 ## Tech Stack
 
@@ -23,9 +25,10 @@ Start by opening your terminal or command prompt.
 ### 2. Clone the Repository
 
    ```bash
-   git clone https://github.com/fericopasaribu/mini-pos.git
-   cd mini-pos
+   git clone https://github.com/fericopasaribu/app-mini-pos.git
+   cd app-mini-pos
    ```
+
 ### 3. Project Setup
 
 - Open your terminal and navigate to the folder where the cloned project is located.
@@ -55,3 +58,9 @@ Start by opening your terminal or command prompt.
     ```bash
     npm run dev
     ```
+
+---
+
+## API Documentation
+
+https://tamanata-app-mini-pos.apidog.io/
